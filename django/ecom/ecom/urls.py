@@ -29,6 +29,8 @@ path('testimonial/',views.testimonial,name="testimonial"),
 path('chackout/',views.chackout,name="chackout"),
 path('contact/',views.contact,name="contact"),
 path('shop_detail/',views.shop_detail,name="shop_detail"),
+path('get_seller_products/',views.get_seller_products,name="get_seller_products"),
+
 
 
 path('logout/',views.logout,name="logout"),

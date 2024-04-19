@@ -196,3 +196,34 @@ def chackout(request):
 
 def contact(request):
     return render(request,'contact.html')
+
+from django.http import JsonResponse
+from .models import products1
+
+from django.http import JsonResponse
+from .models import products1, Seller
+
+def get_seller_products(request):
+    # Assuming you have a way to identify the current seller
+    current_seller_name = request.user.username  # Change this to fetch the current seller from the request
+    
+    try:
+        current_seller = Seller.objects.get(name=current_seller_name)
+    except Seller.DoesNotExist:
+        return JsonResponse({'error': 'Seller not found'}, status=404)
+
+    # Query products for the current seller
+    seller_products = products1.objects.filter(seller=current_seller)
+
+    # Convert products to JSON format
+    products_data = []
+    for product in seller_products:
+        products_data.append({
+            'name': product.name,
+            'price': product.price,
+            'description': product.description,
+            'category': product.category.name,  # Assuming you want to include the category name
+            # Add other fields as needed
+        })
+
+    return JsonResponse({'products': products_data})
