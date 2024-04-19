@@ -197,6 +197,9 @@ def chackout(request):
 def contact(request):
     return render(request,'contact.html')
 
+def search(request):
+    return render(request,'search.html')
+
 from django.http import JsonResponse
 from .models import products1
 

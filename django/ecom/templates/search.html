@@ -161,9 +161,14 @@ body {
 </style>
 </head>
 <body>
-<button class="cancel-btn" onclick="window.location.href='index.html';">
+<!-- <button class="cancel-btn" onclick="window.location.href='index.html';">
     X
-</button>
+</button> -->
+<a href="{% url 'home' %}">
+    <button class="cancel-btn">
+      X
+    </button>
+  </a>
 <div class="container-fluid">
 <div class="container">
 <div class="search">
