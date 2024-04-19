@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate,login as login_process,logout as pr
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from myapp.models import products1
+from myapp.models import Category
+
 # Create your views here.
 
 
@@ -91,23 +93,85 @@ def product_list(request):
     product = products1.objects.all()
     return render(request, 'product_list.html', {'products': product})
 
+from django.shortcuts import render, HttpResponse
+from .models import Seller, Category, products1
+import json
+
+from django.conf import settings
+import os
+import os
+from django.conf import settings
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render
+from .models import products1
+
+import os
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render
+from .models import products1
+
 def add_product(request):
     if request.method == 'POST':
-        # Handle the form submission here, save the data to the database
-        # Example: Assuming you have a Product model
-        
-
+        # Extract product data from the form data
         name = request.POST.get('name')
         price = request.POST.get('price')
         description = request.POST.get('description')
-        shop_name = request.POST.get('shop_name')
-        print(name)
-        product = products1(name=name, price=price, description=description, shopname=shop_name)
+        category_name = request.POST.get('category')
+        image = request.FILES.get('image')  # Access the uploaded image file
+
+        # Get the current user's username
+        current_username = request.user.username
+
+        # Fetch the seller object using the username
+        try:
+            seller = Seller.objects.get(name=current_username)
+        except Seller.DoesNotExist:
+            return JsonResponse({"error": "Seller does not exist"}, status=400)
+
+        # Fetch the category object using the category name
+        try:
+            category = Category.objects.get(name=category_name)
+        except Category.DoesNotExist:
+            return JsonResponse({"error": "Category does not exist"}, status=400)
+
+        # Create the product object
+        product = products1(
+            name=name,
+            price=price,
+            description=description,
+            seller=seller,
+            category=category,
+            quantity=75,  # You may adjust this value as needed
+            image=image
+        )
         product.save()
 
-        
+        # Save the image to the media directory
+        if image:
+            # Define the directory to save the image
+            image_directory = os.path.join(settings.MEDIA_ROOT, 'media')
+            if not os.path.exists(image_directory):
+                os.makedirs(image_directory)
 
-    return render(request, 'add_product.html')
+            # Generate a unique file name
+            image_name = f"{product.product_id}_{image.name}"
+
+            # Write the image file to the directory
+            with open(os.path.join(image_directory, image_name), 'wb+') as destination:
+                for chunk in image.chunks():
+                    destination.write(chunk)
+
+            # Set the image path in the product object
+            product.image = os.path.join('media', image_name)
+            product.save()
+        else:
+            return JsonResponse({"error": "Image is null"}, status=400)
+
+        return HttpResponse("Product added successfully")
+    else:
+        categories = Category.objects.all()
+        return render(request, 'add_product.html', {'categories': categories})
+
 
 
 def cart(request):
