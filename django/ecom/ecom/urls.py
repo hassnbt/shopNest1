@@ -30,9 +30,7 @@ path('chackout/',views.chackout,name="chackout"),
 path('contact/',views.contact,name="contact"),
 path('shop_detail/',views.shop_detail,name="shop_detail"),
 path('get_seller_products/',views.get_seller_products,name="get_seller_products"),
-
-
-
+path('search/', views.search, name="search"),
 path('logout/',views.logout,name="logout"),
 path('product_list/',views.product_list,name="product_list"),
 path('add_product/',views.add_product,name="add_product")
