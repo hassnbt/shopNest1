@@ -113,3 +113,22 @@ def add_product(request):
 def cart(request):
 
     return render(request,'cart.html')
+
+def shop(request):
+
+    return render(request,'shop.html')
+
+def shop_detail(request):
+    return render(request,'shop-detail.html')
+
+def test(request):
+    return render(request,'404.html')
+
+def testimonial(request):
+    return render(request,'testimonial.html')
+
+def chackout(request):
+    return render(request,'chackout.html')
+
+def contact(request):
+    return render(request,'contact.html')
