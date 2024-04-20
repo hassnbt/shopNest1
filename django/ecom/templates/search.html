@@ -176,100 +176,20 @@ body {
 <input type="text" name="" id="find" placeholder="Enter Keywords" onkeyup="search()">
 </div>
 <div class="product-list">
+ 
+{% for product in products %}
     <div class="product">
-        <img src="https://live.hasthemes.com/html/2/sabujcha-preview/sabujcha/assets/img/product/product-1.jpg">
-        <div class="product-details">
-            <h3>ZBebe Bloom Tea</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
-            <div class="price">$100.00</div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
+      <img src="{{ product.image.url }}" alt="{{ product.name }}">  <div class="product-details">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <div class="price">$ {{ product.price }}</div>  <button class="add-to-cart-btn">Add to Cart</button>
+      </div>
     </div>
-    <div class="product">
-        <img src="https://live.hasthemes.com/html/2/sabujcha-preview/sabujcha/assets/img/product/product-2.jpg">
-        <div class="product-details">
-            <h3>oopue Harbal Tea</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
-            <div class="price">$100.00</div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-    </div>
-    <div class="product">
-        <img src="https://live.hasthemes.com/html/2/sabujcha-preview/sabujcha/assets/img/product/product-2.jpg">
-        <div class="product-details">
-            <h3>Nopue Harbal Tea</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
-            <div class="price">$100.00</div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-    </div>
-    <div class="product">
-        <img src="https://live.hasthemes.com/html/2/sabujcha-preview/sabujcha/assets/img/product/product-3.jpg">
-        <div class="product-details">
-            <h3>SBest Friend Tea</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
-            <div class="price">$100.00</div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-    </div>
-    <div class="product">
-        <img src="https://live.hasthemes.com/html/2/sabujcha-preview/sabujcha/assets/img/product/product-1.jpg">
-        <div class="product-details">
-            <h3>VBebe Bloom Tea</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
-            <div class="price">$100.00</div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-    </div>
-    <div class="product">
-        <img src="https://live.hasthemes.com/html/2/sabujcha-preview/sabujcha/assets/img/product/product-2.jpg">
-        <div class="product-details">
-            <h3>Fopue Harbal Tea</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
-            <div class="price">$100.00</div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-    </div>
-    <div class="product">
-        <img src="https://live.hasthemes.com/html/2/sabujcha-preview/sabujcha/assets/img/product/product-3.jpg">
-        <div class="product-details">
-            <h3>Cest Friend Tea</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
-            <div class="price">$100.00</div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-    </div>
-    <div class="product">
-        <img src="https://live.hasthemes.com/html/2/sabujcha-preview/sabujcha/assets/img/product/product-1.jpg">
-        <div class="product-details">
-            <h3>Bebe Bloom Tea</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
-            <div class="price">$100.00</div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-    </div>
-    <div class="product">
-        <img src="https://live.hasthemes.com/html/2/sabujcha-preview/sabujcha/assets/img/product/product-2.jpg">
-        <div class="product-details">
-            <h3>Bopue Harbal Tea</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
-            <div class="price">$100.00</div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-    </div>
-    <div class="product">
-        <img src="https://live.hasthemes.com/html/2/sabujcha-preview/sabujcha/assets/img/product/product-3.jpg">
-        <div class="product-details">
-            <h3>A Friend Tea</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
-            <div class="price">$100.00</div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-        </div>
-    </div>
+  {% endfor %}
+ 
 
-</div>
-</div>
-</div>
+</div></div></div>
+
 <!-- javascript -->
 <script type="text/javascript">
 function search() {
