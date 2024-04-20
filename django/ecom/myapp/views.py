@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from myapp.models import products1
 from myapp.models import Category
+from myapp.models import CartItem
+from myapp.models import buyer
+
 
 # Create your views here.
 
@@ -232,5 +235,40 @@ def get_seller_products(request):
         })
 
     return JsonResponse({'products': products_data})
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def add_to_cart(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        current_buyer_name = request.user.username 
+        quantity = request.POST.get('quantity')
+        cart_products = products1.objects.get(product_id=product_id)
 
 
+        #current_buyer = Seller.objects.get(name=current_buyer_name)
+
+        
+        
+        # Example: Assuming buyer is the currently logged-in user
+       #buyer = request.user.buyer
+
+        # Check if the product is already in the cart
+        cartitem1= CartItem(
+            buyer=current_buyer_name,
+            product=cart_products,
+            quantity=quantity
+
+           
+        )
+        cartitem1.save()
+        
+        return JsonResponse({'status': 'success', 'message': 'Product added to cart'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+    
+
+def cart_count(request):
+    
+    current_buyer_name = request.user.username 
+    count=CartItem.objects.filter(buyer=current_buyer_name).count()
+    return JsonResponse({'count': count})

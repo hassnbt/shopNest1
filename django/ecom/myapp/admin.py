@@ -8,5 +8,7 @@ admin.site.register(products1)
 admin.site.register(Seller)
 admin.site.register(Category)
 admin.site.register(buyer)
+admin.site.register(CartItem)
+
 
 

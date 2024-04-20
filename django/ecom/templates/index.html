@@ -40,6 +40,7 @@
 
 
         <!-- Navbar start -->
+        {% csrf_token %}
         <div class="container-fluid fixed-top">
             <div class="container topbar bg-primary d-none d-lg-block">
                 <div class="d-flex justify-content-between">
@@ -81,22 +82,23 @@
                             </div>
                             <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
                         </div>
-                        <div class="d-flex m-3 me-0">
+                        <div class="d-flex m-2 me-0">
                             <a href="{% url 'search' %}">
                                 <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal">
                                   <i class="fas fa-search text-primary"></i>
                                 </button>
-                              </a>
                               
+                            </a>
+                           <a href="cart.html" class="position-relative me-4 my-auto">
                                 <i class="fa fa-shopping-bag fa-2x"></i>
-                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                                <span id="cartcoun" class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                             </a>
                             {% comment %} <a href="#" class="my-auto">
                                 <i class="fas fa-user fa-2x"></i>
                             </a> {% endcomment %}
                             {% if user.is_authenticated %}
     <!-- Display welcome message with user's name if they are authenticated -->
-    <div style="font-size: 26px;" class="mx-2">Welcome,{{user.username}}! </div>
+    <div style="font-size: 22px;" class="mx-2">Welcome,{{user.username}}! </div>
 {% else %}
     <!-- Display general welcome message if user is not authenticated -->
     <div style="font-size: 12px;">Welcome, Guest! </div>
@@ -287,7 +289,7 @@
                                                     <p>{{ product.description }}</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-5 fw-bold mb-0">${{ product.price }} / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary" value="{{product.product_id}}" data-value1="{{product.seller.name}}"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                        <button onclick="addtocart(this)" class="btn border border-secondary rounded-pill px-3 text-primary" value="{{product.product_id}}" value1="{{product.seller.name}}"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1129,3 +1131,57 @@
     </body>
 
 </html>
+
+<script>
+
+function updateCartCount() {
+    $.ajax({
+        url: '{% url 'cart_count' %}',  // Update this URL based on your actual URL configuration
+        type: 'GET',
+        success: function(response) {
+            console.log('Cart count:', response.count);
+            $('#cartcoun').text(response.count); // Example: Update a span with id `cart-count`
+        },
+        error: function(error) {
+            console.log('Error fetching cart count:', error);
+        }
+    });
+}
+
+// Call updateCartCount on page load or after specific actions
+$(document).ready(function() {
+    updateCartCount();
+});
+
+function addtocart(element) {
+    // Extract product ID from the element's attributes
+    const productId = element.getAttribute('value');
+    const sellerName = element.getAttribute('value1');  // assuming these data attributes are correctly set
+debugger;
+    // AJAX request to the Django server
+    $.ajax({
+        url: '{% url 'add_to_cart' %}',  // URL to Django view (you will need to define this in urls.py)
+        type: 'POST',
+        data: {
+            'product_id': productId,
+            'quantity': 1,  // Example: add one item to cart, customize as needed
+            //'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()  // Handling CSRF token
+        },
+        success: function(response) {
+            debugger;
+    updateCartCount();
+
+            // Handle success
+            console.log('Item added to cart:', response);
+            //alert('Item added to cart!');
+        },
+        error: function(error) {
+            debugger;
+            // Handle errors
+            console.log('Error adding item to cart:', error);
+            alert('Failed to add item to cart.');
+        }
+    });
+}
+
+</script>

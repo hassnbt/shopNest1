@@ -33,6 +33,9 @@ path('get_seller_products/',views.get_seller_products,name="get_seller_products"
 path('search/', views.search, name="search"),
 path('logout/',views.logout,name="logout"),
 path('product_list/',views.product_list,name="product_list"),
+path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
+path('cart_count/', views.cart_count, name='cart_count'),
+
 path('add_product/',views.add_product,name="add_product")
 ]
 from django.conf import settings
