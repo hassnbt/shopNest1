@@ -74,8 +74,8 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="{% url 'cart' %}" class="dropdown-item">Cart</a>
-                                    <a href="{% url 'chackout' %}"class="dropdown-item">Chackout</a>
+                                    <a href="{% url 'cart' %}" class="dropdown-item active">Cart</a>
+                                    <a href="{% url 'chackout' %}"class="dropdown-item ">Chackout</a>
                                     <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
                                     <a href="{% url 'test' %}" class="dropdown-item">404 Page</a>
                                 </div>
@@ -301,7 +301,10 @@
                                 <h5 class="mb-0 ps-4 me-4">Total</h5>
                                 <p class="mb-0 pe-4">$99.00</p>
                             </div>
-                            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
+                            <a href="{% url 'chackout' %}">
+                                <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed to Checkout</button>
+                            </a>
+                              
                         </div>
                     </div>
                 </div>
