@@ -210,6 +210,9 @@ def chackout(request):
 def contact(request):
     return render(request,'contact.html')
 
+# def index(request):
+#     return render(request,'index.html')
+
 def search(request):
     product = products1.objects.all()
     return render(request, 'search.html', {'products': product})
