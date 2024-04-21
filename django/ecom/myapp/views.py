@@ -359,5 +359,5 @@ def update_cart_item_quantity(request):
     else:
         return JsonResponse({'error': 'Invalid request method'})
 
-# def checkout(request):
-#     return render(request,'chackout.html')
+def checkout(request):
+    return render(request,'chackout.html')
