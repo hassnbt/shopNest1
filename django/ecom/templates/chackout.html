@@ -150,54 +150,54 @@
         <div class="container-fluid py-5">
             <div class="container py-5">
                 <h1 class="mb-4">Billing details</h1>
-                <form action="#">
+                <form id="orderForm">
                     <div class="row g-5">
                         <div class="col-md-12 col-lg-6 col-xl-7">
                             <div class="row">
                                 <div class="col-md-12 col-lg-6">
                                     <div class="form-item w-100">
                                         <label class="form-label my-3">First Name<sup>*</sup></label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control"  name="firstname">
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-lg-6">
                                     <div class="form-item w-100">
                                         <label class="form-label my-3">Last Name<sup>*</sup></label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control"  name="lastname">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Company Name<sup>*</sup></label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="company">
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Address <sup>*</sup></label>
-                                <input type="text" class="form-control" placeholder="House Number Street Name">
+                                <input type="text" class="form-control" placeholder="House Number Street Name" name="address">
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Town/City<sup>*</sup></label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="city">
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Country<sup>*</sup></label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control"  name="country">
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Postcode/Zip<sup>*</sup></label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="postcode">
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Mobile<sup>*</sup></label>
-                                <input type="tel" class="form-control">
+                                <input type="tel" class="form-control" name="mobile">
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Email Address<sup>*</sup></label>
-                                <input type="email" class="form-control">
+                                <input type="email" class="form-control" name="email">
                             </div>
                            
                             <div class="form-item">
-                                <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="11" placeholder="Oreder Notes (Optional)"></textarea>
+                                <textarea class="form-control" name="ordernotes" spellcheck="false" cols="30" rows="11" placeholder="Oreder Notes (Optional)"></textarea>
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-6 col-xl-5">
@@ -262,15 +262,15 @@
                                             </td>
                                            <td colspan="3" class="py-5">
     <div class="form-check text-start">
-        <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-1" name="shipping_method" value="Free Shipping">
+        <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-1" name="shipping_method" value="0">
         <label class="form-check-label" for="Shipping-1">Free Shipping</label>
     </div>
     <div class="form-check text-start">
-        <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-2" name="shipping_method" value="Flat rate: $15.00">
+        <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-2" name="shipping_method" value="15">
         <label class="form-check-label" for="Shipping-2">Flat rate: $15.00</label>
     </div>
     <div class="form-check text-start">
-        <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-3" name="shipping_method" value="Local Pickup: $8.00">
+        <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-3" name="shipping_method" value="8">
         <label class="form-check-label" for="Shipping-3">Local Pickup: $8.00</label>
     </div>
 </td>
@@ -286,7 +286,7 @@
                                             <td class="py-5"></td>
                                             <td class="py-5">
                                                 <div class="py-3 border-bottom border-top">
-                                                    <p class="mb-0 text-dark">$135.00</p>
+                                                    <p class="mb-0 text-dark">${{total_price}}</p>
                                                 </div>
                                             </td>
                                         </tr>
@@ -296,7 +296,7 @@
                          <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
     <div class="col-12">
         <div class="form-check text-start my-3">
-            <input type="radio" class="form-check-input bg-primary border-0" id="Transfer-1" name="payment_method" value="Direct Bank Transfer">
+            <input type="radio" class="form-check-input bg-primary border-0" id="Transfer-1" name="payment_method" value="DirectBankTransfer">
             <label class="form-check-label" for="Transfer-1">Direct Bank Transfer</label>
         </div>
         <p class="text-start text-dark">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
@@ -305,7 +305,7 @@
 <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
     <div class="col-12">
         <div class="form-check text-start my-3">
-            <input type="radio" class="form-check-input bg-primary border-0" id="Payments-1" name="payment_method" value="Check Payments">
+            <input type="radio" class="form-check-input bg-primary border-0" id="Payments-1" name="payment_method" value="CheckPayments">
             <label class="form-check-label" for="Payments-1">Check Payments</label>
         </div>
     </div>
@@ -313,7 +313,7 @@
 <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
     <div class="col-12">
         <div class="form-check text-start my-3">
-            <input type="radio" class="form-check-input bg-primary border-0" id="Delivery-1" name="payment_method" value="Cash On Delivery">
+            <input type="radio" class="form-check-input bg-primary border-0" id="Delivery-1" name="payment_method" value="CashOnDelivery">
             <label class="form-check-label" for="Delivery-1">Cash On Delivery</label>
         </div>
     </div>
@@ -328,7 +328,7 @@
 </div>
 
                             <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                                <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place Order</button>
+                                <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place Order</button>
                             </div>
                         </div>
                     </div>
@@ -564,5 +564,30 @@ function updateTotalPrice() {
         }
     });
 }
-
+$(document).ready(function() {
+    $('#orderForm').submit(function(event) {
+      // Prevent the form from submitting normally
+      event.preventDefault();
+      debugger;
+      // Collect form data
+      var formData = $(this).serialize();
+      
+      // Send form data to backend using AJAX
+      $.ajax({
+        type: 'POST',
+        url: '{% url 'submit_order' %}',  // Replace 'save_order' with the URL of your Django view
+        data: formData,
+        success: function(response) {
+          // Handle success response
+          // For example, display a success message
+          alert('Order placed successfully!');
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          // Handle error response
+          // For example, display an error message
+          alert('Error placing order. Please try again later.');
+        }
+      });
+    });
+  });
 </script>

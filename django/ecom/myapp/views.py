@@ -193,7 +193,7 @@ def testimonial(request):
     return render(request,'testimonial.html')
 
 def chackout(request):
-     # Get the current user's username
+      # Get the current user's username
     current_user = request.user.username
 
     # Retrieve cart items for the current user
@@ -205,13 +205,11 @@ def chackout(request):
 
     # Calculate total price for all items in the cart
     total_price = sum(item.total_price for item in cart_items)
-    return render(request,'chackout.html')
+
+    return render(request,'chackout.html', {'cart_items': cart_items, 'total_price': total_price})
 
 def contact(request):
     return render(request,'contact.html')
-
-# def index(request):
-#     return render(request,'index.html')
 
 def search(request):
     product = products1.objects.all()
@@ -359,5 +357,37 @@ def update_cart_item_quantity(request):
     else:
         return JsonResponse({'error': 'Invalid request method'})
 
-# def checkout(request):
-#     return render(request,'chackout.html')
+def checkout(request):
+    return render(request,'chackout.html')
+
+
+from .models import Order
+@login_required
+@csrf_exempt 
+def submit_order(request):
+    if request.method == 'POST':
+        current_user = request.user.username
+        # Create an Order from the POST data
+        new_order = Order(
+            username=current_user,
+            first_name=request.POST.get('firstname', ''),
+            last_name=request.POST.get('lastname', ''),
+            company_name=request.POST.get('company', ''),
+            address=request.POST.get('address', ''),
+            town_city=request.POST.get('city', ''),
+            country=request.POST.get('country', ''),
+            postcode=request.POST.get('postcode', ''),
+            mobile=request.POST.get('mobile', ''),
+            email=request.POST.get('email', ''),
+            order_notes=request.POST.get('ordernotes', ''),
+            shipping=request.POST.get('shipping_method', ''),
+            pay_method=request.POST.get('payment_method', '')
+            
+        )
+        new_order.save()
+
+        return JsonResponse({'success': True})
+ # Redirect to a new URL if the order is successful
+    else:
+        # Render form again or show error
+        return JsonResponse({'error': True})

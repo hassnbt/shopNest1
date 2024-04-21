@@ -228,7 +228,7 @@
                         <h5 class="mb-0 ps-4 me-4">Total</h5>
                         <p id="total-price1" class="mb-0 pe-4">${{ total_price }}</p>
                     </div>
-                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
+                    <a href="{% url 'chackout' %}" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Proceed Checkout</a>
                 </div>
             </div>
         </div>
@@ -456,8 +456,8 @@ function updateTotalPrice() {
         type: 'GET',
         success: function(response) {
             // If the recalculation is successful, update the total price displayed on the page
-            $('#total-price').text(response.total_price);
-            $('#total-price1').text(response.total_price+300);
+            $('#total-price').text('$'+response.total_price);
+            $('#total-price1').text('$'+response.total_price);
 
         },
         error: function(xhr, errmsg, err) {

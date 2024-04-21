@@ -58,3 +58,19 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} of {self.product.name} ({self.status})"
+
+class Order(models.Model):
+    username = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    company_name = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
+    town_city = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    postcode = models.CharField(max_length=200)
+    mobile = models.CharField(max_length=200)
+    email = models.EmailField()
+    order_notes = models.TextField(blank=True, null=True)
+    shipping = models.CharField(max_length=200)
+    pay_method = models.CharField(max_length=200)
+    date_added = models.DateTimeField(default=timezone.now)
