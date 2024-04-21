@@ -35,8 +35,12 @@ path('logout/',views.logout,name="logout"),
 path('product_list/',views.product_list,name="product_list"),
 path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
 path('cart_count/', views.cart_count, name='cart_count'),
+path('delete_cart_item/', views.delete_cart_item, name='delete_cart_item'),
+path('update_total_price/', views.update_total_price, name='update_total_price'),
+path('update_cart_item_quantity/', views.update_cart_item_quantity, name='update_cart_item_quantity'),
+path('add_product/',views.add_product,name="add_product"),
+path('checkout/',views.checkout,name="checkout")
 
-path('add_product/',views.add_product,name="add_product")
 ]
 from django.conf import settings
 from django.conf.urls.static import static

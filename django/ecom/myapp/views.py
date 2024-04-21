@@ -177,9 +177,7 @@ def add_product(request):
 
 
 
-def cart(request):
 
-    return render(request,'cart.html')
 
 def shop(request):
 
@@ -195,6 +193,18 @@ def testimonial(request):
     return render(request,'testimonial.html')
 
 def chackout(request):
+     # Get the current user's username
+    current_user = request.user.username
+
+    # Retrieve cart items for the current user
+    cart_items = CartItem.objects.filter(buyer=current_user)
+
+    # Calculate total price for each item according to quantity
+    for item in cart_items:
+        item.total_price = item.quantity * item.product.price
+
+    # Calculate total price for all items in the cart
+    total_price = sum(item.total_price for item in cart_items)
     return render(request,'chackout.html')
 
 def contact(request):
@@ -245,14 +255,7 @@ def add_to_cart(request):
         cart_products = products1.objects.get(product_id=product_id)
 
 
-        #current_buyer = Seller.objects.get(name=current_buyer_name)
-
-        
-        
-        # Example: Assuming buyer is the currently logged-in user
-       #buyer = request.user.buyer
-
-        # Check if the product is already in the cart
+       
         cartitem1= CartItem(
             buyer=current_buyer_name,
             product=cart_products,
@@ -272,3 +275,86 @@ def cart_count(request):
     current_buyer_name = request.user.username 
     count=CartItem.objects.filter(buyer=current_buyer_name).count()
     return JsonResponse({'count': count})
+
+@login_required
+@csrf_exempt
+def cart(request):
+    # Get the current user's username
+    current_user = request.user.username
+
+    # Retrieve cart items for the current user
+    cart_items = CartItem.objects.filter(buyer=current_user)
+
+    # Calculate total price for each item according to quantity
+    for item in cart_items:
+        item.total_price = item.quantity * item.product.price
+
+    # Calculate total price for all items in the cart
+    total_price = sum(item.total_price for item in cart_items)
+
+    return render(request, 'cart.html', {'cart_items': cart_items, 'total_price': total_price})
+
+from django.http import JsonResponse
+from .models import CartItem
+@login_required
+@csrf_exempt
+def delete_cart_item(request):
+    if request.method == 'POST':
+        cart_item_id = request.POST.get('cart_item_id')
+        try:
+            cart_item = CartItem.objects.get(id=cart_item_id)
+            cart_item.delete() # Delete the cart item from the database
+            return JsonResponse({'success': True}) # Return success response
+        except CartItem.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Cart item not found'}) # Return error response if the cart item does not exist
+    else:
+        return JsonResponse({'success': False, 'error': 'Invalid request method'}) # Return error response for invalid request method
+@login_required
+@csrf_exempt   
+def update_total_price(request):
+    if request.method == 'GET':
+        # Retrieve all cart items for the current user
+        current_user = request.user.username
+        cart_items = CartItem.objects.filter(buyer=current_user)
+        
+        # Calculate total price for all items in the cart
+        total_price = sum(item.quantity * item.product.price for item in cart_items)
+        
+        return JsonResponse({'total_price': total_price}) # Return total price as JSON response
+    else:
+        return JsonResponse({'error': 'Invalid request method'}) # Return error response for invalid request method    
+@login_required
+@csrf_exempt 
+def update_cart_item_quantity(request):
+    if request.method == 'POST':
+        cart_item_id = request.POST.get('cart_item_id')
+        new_quantity = int(request.POST.get('quantity', 0))  # Get the new quantity and convert it to an integer
+
+        try:
+            cart_item = CartItem.objects.get(id=cart_item_id)
+            product = products1.objects.get(product_id=cart_item.product.product_id)  # Access the related product through the foreign key
+
+            if new_quantity > product.quantity:
+                # If the requested quantity exceeds the available stock
+                return JsonResponse({
+                    'success': False,
+                    'error': 'Insufficient stock available',
+                    'max_quantity': product.quantity
+                })
+
+            if new_quantity <= 0:
+                # Handle cases where the quantity is zero or negative
+                return JsonResponse({'error': 'Quantity must be greater than zero'})
+
+            cart_item.quantity = new_quantity
+            cart_item.save()
+            return JsonResponse({'success': True, 'quantity': new_quantity})
+        except CartItem.DoesNotExist:
+            return JsonResponse({'error': 'Cart item does not exist'})
+        except ValueError:
+            return JsonResponse({'error': 'Invalid quantity value'})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
+
+# def checkout(request):
+#     return render(request,'chackout.html')
