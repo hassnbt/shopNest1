@@ -372,8 +372,15 @@ from .models import Order
 @csrf_exempt 
 def submit_order(request):
     if request.method == 'POST':
-        current_user = request.user.username
-        # Create an Order from the POST data
+        current_user = request.user.username 
+         # Get the cart items for the current user
+        cart_items = CartItem.objects.filter(buyer=current_user)
+        # Change the status of each cart item to 'ordered'
+        for item in cart_items:
+            item.status = 'ordered'
+            item.save()
+
+# Create an Order from the POST data
         new_order = Order(
             username=current_user,
             first_name=request.POST.get('firstname', ''),
@@ -397,3 +404,4 @@ def submit_order(request):
     else:
         # Render form again or show error
         return JsonResponse({'error': True})
+    
