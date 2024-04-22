@@ -67,6 +67,7 @@ def home(request):
     electronic_products = []
     cosmetics_products = []
     groceries_products = []
+    toys_products = []
 
     # Separate products into different categories based on conditions
     for product in all_products:
@@ -76,7 +77,9 @@ def home(request):
             cosmetics_products.append(product)
         elif product.category.name == 'Groceries':
             groceries_products.append(product)
-    
+        elif product.category.name == 'Toys':
+            toys_products.append(product)
+        
     # Check if the user exists in the Seller table
     user_exists = Seller.objects.filter(name=request.user.username).exists()
 
@@ -84,7 +87,10 @@ def home(request):
         'electronic_products': electronic_products,
         'cosmetics_products': cosmetics_products,
         'groceries_products': groceries_products,
+        'all_products': all_products,
+        'toys_products':toys_products ,
         'user_exists': user_exists
+        
     })
 
 
