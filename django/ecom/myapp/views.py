@@ -289,8 +289,8 @@ def cart(request):
     # Get the current user's username
     current_user = request.user.username
 
-    # Retrieve cart items for the current user
-    cart_items = CartItem.objects.filter(buyer=current_user)
+     # Retrieve cart items for the current user excluding items with status 'ordered'
+    cart_items = CartItem.objects.filter(buyer=current_user, status='pending')
 
     # Calculate total price for each item according to quantity
     for item in cart_items:
