@@ -81,6 +81,7 @@ def home(request):
     user_exists = Seller.objects.filter(name=request.user.username).exists()
 
     return render(request, 'index.html', {
+        'all_products': all_products,
         'electronic_products': electronic_products,
         'cosmetics_products': cosmetics_products,
         'groceries_products': groceries_products,
