@@ -580,6 +580,7 @@ $(document).ready(function() {
         success: function(response) {
           // Handle success response
           // For example, display a success message
+          updateCartCount();
           alert('Order placed successfully!');
         },
         error: function(xhr, textStatus, errorThrown) {

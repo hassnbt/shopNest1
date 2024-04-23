@@ -204,7 +204,7 @@ def chackout(request):
     current_user = request.user.username
 
     # Retrieve cart items for the current user
-    cart_items = CartItem.objects.filter(buyer=current_user)
+    cart_items = CartItem.objects.filter(buyer=current_user, status='pending')
 
     # Calculate total price for each item according to quantity
     for item in cart_items:
@@ -281,7 +281,7 @@ def add_to_cart(request):
 def cart_count(request):
     
     current_buyer_name = request.user.username 
-    count=CartItem.objects.filter(buyer=current_buyer_name).count()
+    count=CartItem.objects.filter(buyer=current_buyer_name, status='pending').count()
     return JsonResponse({'count': count})
 
 @login_required
