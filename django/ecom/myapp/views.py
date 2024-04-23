@@ -58,7 +58,7 @@ def signup(request):
 
        
 
-   
+from django.db.models import Sum 
 @login_required(login_url='login')
 def home(request):
     all_products = products1.objects.all()
@@ -82,8 +82,100 @@ def home(request):
         
     # Check if the user exists in the Seller table
     user_exists = Seller.objects.filter(name=request.user.username).exists()
+    
+
+# Step 1: Filter cart items with status 'ordered'
+    cart_items = CartItem.objects.filter(status='ordered')
+
+# Step 2: Group the cart items by product and calculate total quantity
+    product_quantities = cart_items.values('product__product_id', 'product__name').annotate(total_quantity=Sum('quantity'))
+
+# Step 3: Sort the product_quantities list based on total_quantity in descending order
+    sorted_product_quantities = sorted(product_quantities, key=lambda item: item['total_quantity'], reverse=True)
+
+# Step 4: Get the top 2 products with the maximum total quantity
+    top_2_max_products = product_quantities.order_by('-total_quantity')[:6]
+    #top_2_max_products = top_10_max_products[:2]
+
+# Step 5: Retrieve the product objects for the top 2 products
+    top_2_products = []
+    for item in top_2_max_products:
+     product_id = item['product__product_id']
+     product = products1.objects.get(product_id=product_id)
+     top_2_products.append(product)
+    
+    current_username = request.user.username
+    
+    cart_items1 = CartItem.objects.filter(status='ordered',buyer=current_username)
+
+# Step 2: Group the cart items by product and calculate total quantity
+    product_quantities1 = cart_items1.values('product__product_id', 'product__name').annotate(total_quantity=Sum('quantity'))
+
+# Step 3: Sort the product_quantities list based on total_quantity in descending order
+    sorted_product_quantities1 = sorted(product_quantities1, key=lambda item: item['total_quantity'], reverse=True)
+
+# Step 4: Get the top 2 products with the maximum total quantity
+    #top_2_max_products = product_quantities.order_by('-total_quantity')[:6]
+    top_2_max_products1 = product_quantities1.order_by('-total_quantity')[:300]
+
+# Extracting product IDs from the top 2 products
+    top_2_product_ids1 = [item['product__product_id'] for item in top_2_max_products1]
+
+# Retrieving products for the top 2 product IDs
+    top_2_products1 = products1.objects.filter(product_id__in=top_2_product_ids1)
+
+# Extracting category IDs from the top 2 products
+    # Extracting category names from the top 2 products
+   # top_2_category_names = top_2_products1.values_list('category__name', flat=True)
+    #top_2_category_names = top_2_products.values_list('category__name', flat=True).distinct()
+    top_2_category_names = []
+    for product in top_2_products1:
+     top_2_category_names.append(product.category.name)
+
+# Ensuring unique category names
+     top_2_category_names = list(set(top_2_category_names))
+
+# Retrieving categories for the extracted category names
+     #top_2_categories = Category.objects.get(name__in=top_2_category_names)
+# Retrieving categories for the extracted category names
+    #top_2_categories = Category.objects.filter(name__in=top_2_category_names)
+# Retrieving categories for the extracted category names
+    top_2_categories1 = []
+    for category_name in top_2_category_names:
+     categories = Category.objects.filter(name=category_name)
+    for category in categories:
+        top_2_categories1.append(category.name)
+
+    top_5_products = []
+    for item in top_2_categories1:
+      current_username = request.user.username
+     
+      cart_items = CartItem.objects.filter(product__category__name=item, status='ordered',buyer=current_username)
+
+# Group the cart items by product and calculate total quantity
+      product_quantities = cart_items.values('product__product_id', 'product__name').annotate(total_quantity=Sum('quantity'))
+
+# Sort the product_quantities list based on total_quantity in descending order
+    #sorted_product_quantities = sorted(product_quantities, key=lambda item: item['total_quantity'], reverse=True)
+      top_5_max_products = product_quantities.order_by('-total_quantity')[:12]
+      top_5_products=[]
+      for item in top_5_max_products:
+        product_id = item['product__product_id']
+        product = products1.objects.get(product_id=product_id)
+        top_5_products.append(product)
+
+   # top_5_products=top_5_products1+top_5_products
+# Get the top 5 products with the maximum total quantity
+    #top_5_max_products = sorted_product_quantities[:5]
+
+# Retrieve the product objects for the top 5 products
+    
+      
+
 
     return render(request, 'index.html', {
+        'product_with_max_quantity': top_2_products,
+        'top_5_products':top_5_products,
         'all_products': all_products,
         'electronic_products': electronic_products,
         'cosmetics_products': cosmetics_products,
