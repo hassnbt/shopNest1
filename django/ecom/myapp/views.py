@@ -67,6 +67,7 @@ def home(request):
     electronic_products = []
     cosmetics_products = []
     groceries_products = []
+    toys_products = []
 
     # Separate products into different categories based on conditions
     for product in all_products:
@@ -76,7 +77,9 @@ def home(request):
             cosmetics_products.append(product)
         elif product.category.name == 'Groceries':
             groceries_products.append(product)
-    
+        elif product.category.name == 'Toys':
+            toys_products.append(product)
+        
     # Check if the user exists in the Seller table
     user_exists = Seller.objects.filter(name=request.user.username).exists()
 
@@ -85,7 +88,10 @@ def home(request):
         'electronic_products': electronic_products,
         'cosmetics_products': cosmetics_products,
         'groceries_products': groceries_products,
+        'all_products': all_products,
+        'toys_products':toys_products ,
         'user_exists': user_exists
+        
     })
 
 
@@ -284,8 +290,8 @@ def cart(request):
     # Get the current user's username
     current_user = request.user.username
 
-    # Retrieve cart items for the current user
-    cart_items = CartItem.objects.filter(buyer=current_user)
+     # Retrieve cart items for the current user excluding items with status 'ordered'
+    cart_items = CartItem.objects.filter(buyer=current_user, status='pending')
 
     # Calculate total price for each item according to quantity
     for item in cart_items:
@@ -367,8 +373,15 @@ from .models import Order
 @csrf_exempt 
 def submit_order(request):
     if request.method == 'POST':
-        current_user = request.user.username
-        # Create an Order from the POST data
+        current_user = request.user.username 
+         # Get the cart items for the current user
+        cart_items = CartItem.objects.filter(buyer=current_user)
+        # Change the status of each cart item to 'ordered'
+        for item in cart_items:
+            item.status = 'ordered'
+            item.save()
+
+# Create an Order from the POST data
         new_order = Order(
             username=current_user,
             first_name=request.POST.get('firstname', ''),
@@ -392,3 +405,4 @@ def submit_order(request):
     else:
         # Render form again or show error
         return JsonResponse({'error': True})
+    
