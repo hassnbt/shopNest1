@@ -41,7 +41,14 @@ path('update_total_price/', views.update_total_price, name='update_total_price')
 path('update_cart_item_quantity/', views.update_cart_item_quantity, name='update_cart_item_quantity'),
 path('add_product/',views.add_product,name="add_product"),
 path('checkout/',views.checkout,name="checkout"),
-path('submit_order/',views.submit_order,name="submit_order")
+path('submit_order/',views.submit_order,name="submit_order"),
+path('get_seller_productsd/',views.get_seller_productsd,name="get_seller_productsd"),
+path('delete_product/',views.delete_product,name="delete_product"),
+
+
+
+
+
 
 
 ]

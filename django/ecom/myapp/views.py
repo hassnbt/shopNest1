@@ -339,10 +339,13 @@ def get_seller_products(request):
     products_data = []
     for product in seller_products:
         products_data.append({
+            'image':product.image.url,
+            'id':product.product_id, 
             'name': product.name,
             'price': product.price,
-            'description': product.description,
-            'category': product.category.name,  # Assuming you want to include the category name
+            'description': product.quantity,
+            'category': product.category.name
+            # Assuming you want to include the category name
             # Add other fields as needed
         })
 
@@ -500,3 +503,42 @@ def submit_order(request):
         # Render form again or show error
         return JsonResponse({'error': True})
     
+def get_seller_productsd(request):
+    # Assuming you have a way to identify the current seller
+    current_seller_name = request.user.username  # Change this to fetch the current seller from the request
+    
+    try:
+        current_seller = Seller.objects.get(name=current_seller_name)
+    except Seller.DoesNotExist:
+        return JsonResponse({'error': 'Seller not found'}, status=404)
+    seller_cart_item_ids = CartItem.objects.filter(product__seller__name=current_seller, status='ordered').values_list('product_id', flat=True)
+
+    # Query products for the current seller that have associated cart items with status 'ordered'
+    seller_products = products1.objects.filter(seller=current_seller, product_id__in=seller_cart_item_ids)
+    
+    # Convert products to JSON format
+    # Convert products to JSON format
+    products_data = []
+    for product in seller_products:
+        products_data.append({
+            'name': product.name,
+            'price': product.price,
+            'description': product.description,
+            'category': product.category.name,  # Assuming you want to include the category name
+            'prod_id':product.product_id
+            # Add other fields as needed
+        })
+
+    return JsonResponse({'products': products_data})
+
+def delete_product(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        try:
+            # Delete the product based on the received ID
+            products1.objects.filter(product_id=product_id).delete()
+            return JsonResponse({'message': 'Product deleted successfully'}, status=200)
+        except products1.DoesNotExist:
+            return JsonResponse({'error': 'Product not found'}, status=404)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
