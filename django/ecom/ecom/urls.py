@@ -44,6 +44,12 @@ path('checkout/',views.checkout,name="checkout"),
 path('submit_order/',views.submit_order,name="submit_order"),
 path('get_seller_productsd/',views.get_seller_productsd,name="get_seller_productsd"),
 path('delete_product/',views.delete_product,name="delete_product"),
+path('productdetails/<int:product_id>/',views.productdetails,name="productdetails"),
+path('post_comment/',views.post_comment, name='post_comment'),
+path('load_reviews/', views.load_reviews, name='load_reviews')
+
+
+
 
 
 

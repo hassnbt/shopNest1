@@ -74,3 +74,15 @@ class Order(models.Model):
     shipping = models.CharField(max_length=200)
     pay_method = models.CharField(max_length=200)
     date_added = models.DateTimeField(default=timezone.now)
+
+class review(models.Model):
+    product_id=models.IntegerField()
+    username = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100,default='@gmail.com')
+
+    
+    description = models.TextField()
+
+    def __str__(self):
+        return self.username    

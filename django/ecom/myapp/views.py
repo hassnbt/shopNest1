@@ -7,6 +7,8 @@ from myapp.models import products1
 from myapp.models import Category
 from myapp.models import CartItem
 from myapp.models import buyer
+from myapp.models import review
+
 
 
 # Create your views here.
@@ -586,3 +588,43 @@ def delete_product(request):
             return JsonResponse({'error': 'Product not found'}, status=404)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+
+def productdetails(request,product_id):
+
+    product=products1.objects.get(product_id=product_id)
+    return render(request,"productdetails.html",{'product':product})  
+
+# views.py
+
+
+@login_required
+@csrf_exempt 
+def post_comment(request):
+    if request.method == 'POST':
+        current_name = request.user.username  # Change this to fetch the current seller from the request
+
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        review1 = request.POST.get('review')
+        product_id = request.POST.get('pid')
+        
+       
+
+
+        # Save data to the database
+        review_obj = review(product_id=product_id,username=current_name,first_name=name,email=email,description=review1)
+        review_obj.save()
+
+        return JsonResponse({'status': 'success', 'message': 'Comment posted successfully'})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+
+@login_required
+@csrf_exempt 
+def load_reviews(request):
+    product_id = request.POST.get('pid')
+
+    reviews = review.objects.filter(product_id=product_id).values('first_name', 'email', 'description')
+    return JsonResponse(list(reviews), safe=False)

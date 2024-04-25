@@ -10,6 +10,8 @@ admin.site.register(Category)
 admin.site.register(buyer)
 admin.site.register(CartItem)
 admin.site.register(Order)
+admin.site.register(review)
+
 
 
 
