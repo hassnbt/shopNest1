@@ -285,7 +285,51 @@ def shop(request):
     return render(request,'shop.html')
 
 def shop_detail(request):
-    return render(request,'shop-detail.html')
+    all_products = products1.objects.all()
+    
+    # Initialize list to store electronic products
+    
+        
+    electronic_products = []
+    cosmetics_products = []
+    groceries_products = []
+    toys_products = []
+    quantity1=0
+    quantity2=0
+    quantity3=0
+    quantity4=0
+    
+    # Separate products into different categories based on conditions
+    for product in all_products:
+        if product.category.name == 'Electronic':
+            electronic_products.append(product)
+             # Calculate the quantity of electronic products
+            quantity1 = len(electronic_products)
+
+        elif product.category.name == 'Cosmetics':
+            cosmetics_products.append(product)
+            quantity2 = len(cosmetics_products)
+
+
+        elif product.category.name == 'Groceries':
+            groceries_products.append(product)
+            quantity3 = len(groceries_products)
+
+        
+        elif product.category.name == 'Toys':
+            toys_products.append(product)
+            quantity4 = len(toys_products)
+
+   
+      
+    return render(request, 'shop-detail.html', {
+        'all_products': all_products,
+        'electronic_products': electronic_products,
+        'quantity1': quantity1,
+        'quantity2': quantity2,
+        'quantity3': quantity3,
+        'quantity4': quantity4,
+    })
 
 def test(request):
     return render(request,'404.html')
