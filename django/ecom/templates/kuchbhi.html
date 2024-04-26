@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font: 15px arial, sans-serif;
+      background-color: #d9d9d9;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    #bodybox {
+      position: relative;
+      margin: auto;
+      max-width: 550px;
+      font: 15px arial, sans-serif;
+      background-color: white;
+      border-style: solid;
+      border-width: 1px;
+      padding-top: 20px;
+      padding-bottom: 25px;
+      padding-right: 25px;
+      padding-left: 25px;
+      box-shadow: 5px 5px 5px grey;
+      border-radius: 15px;
+    }
+
+    #chatboarder {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      border-style: solid;
+      background-color: #f6f9f6;
+      border-width: 3px;
+      padding-top: 10px;
+      padding-bottom: 15px;
+      padding-right: 20px;
+      padding-left: 15px;
+      border-radius: 15px;
+    }
+
+    .chatlog {
+      font: 15px arial, sans-serif;
+    }
+
+    #chatbox {
+      font: 15px arial, sans-serif;
+      height: 22px;
+      width: 100%;
+    }
+
+    h1 {
+      margin: auto;
+    }
+
+    pre {
+      background-color: #f0f0f0;
+      margin-left: 20px;
+    }
+
+    .exitButton {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px 10px;
+      background-color: #ff0000;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .exitButton:hover {
+      background-color: #cc0000;
+    }
+
+    .chatButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .chatButton:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="bodybox">
+    <h1>Kya hal ha</h1>
+    <h1>Kya hal ha</h1>
+    <h1>Kya hal ha</h1>
+    <h1>Kya hal ha</h1>
+  </div>
+
+  <button id="openChatButton" class="chatButton">Open Chat</button>
+
+  <div id='chatboarder' style="display: none;">
+    <h2>Chatbox</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet quam nec est fermentum, in dapibus dolor cursus. Fusce non nisi vitae nisi luctus lacinia. Donec maximus neque at orci consequat, a egestas nisl condimentum. Vestibulum eu risus in ligula bibendum pretium.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet quam nec est fermentum, in dapibus dolor cursus. Fusce non nisi vitae nisi luctus lacinia. Donec maximus neque at orci consequat, a egestas nisl condimentum. Vestibulum eu risus in ligula bibendum pretium.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet quam nec est fermentum, in dapibus dolor cursus. Fusce non nisi vitae nisi luctus lacinia. Donec maximus neque at orci consequat, a egestas nisl condimentum. Vestibulum eu risus in ligula bibendum pretium.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet quam nec est fermentum, in dapibus dolor cursus. Fusce non nisi vitae nisi luctus lacinia. Donec maximus neque at orci consequat, a egestas nisl condimentum. Vestibulum eu risus in ligula bibendum pretium.</p>
+    <p id="chatlog7" class="chatlog">&nbsp;</p>
+    <p id="chatlog6" class="chatlog">&nbsp;</p>
+    <p id="chatlog5" class="chatlog">&nbsp;</p>
+    <p id="chatlog4" class="chatlog">&nbsp;</p>
+    <p id="chatlog3" class="chatlog">&nbsp;</p>
+    <p id="chatlog2" class="chatlog">&nbsp;</p>
+    <p id="chatlog1" class="chatlog">&nbsp;</p>
+    <input type="text" name="chat" id="chatbox">
+    <button id="exitButton" class="exitButton">Exit</button>
+  </div>
+
+  <script>
+    var messages = [],
+      lastUserMessage = "",
+      botMessage = "",
+      botName = 'Butt';
+
+    let currentOrder = '';
+
+    function chatbotResponse() {
+      var userMessageLower = lastUserMessage.replace(/[^a-zA-Z0-9#]/g, '').toLowerCase();
+
+      botMessage = "I'm confused...";
+
+      if (userMessageLower.includes('hi') || userMessageLower.includes('aoa')) {
+        botMessage = 'Dear Customer, How can we facilitate you?';
+      }
+      if (userMessageLower.includes('exit')) {
+        botMessage = 'If you have any more questions or need further assistance, feel free to ask. Have a great day!';
+      }
+      if (userMessageLower.includes('order') || userMessageLower.includes('return') || userMessageLower.includes('exchange') || userMessageLower.includes('ordered') || userMessageLower.includes('refund')) {
+        botMessage = 'Plz Share Order Number!';
+      }
+      if (userMessageLower.includes('bc') || userMessageLower.includes('ghandu') || userMessageLower.includes('lora') || userMessageLower.includes('benchod') || userMessageLower.includes('yakki')) {
+        botMessage = 'Behn K Lorray , Tameez se baat ker!';
+      }
+      if (userMessageLower.includes('fuck') || userMessageLower.includes('shitt') || userMessageLower.includes('dickhead') || userMessageLower.includes('idiot') || userMessageLower.includes('shutup')) {
+        botMessage = 'Mother Fucker Dont Cross Limits, Talk Respectfully !';
+      }
+
+      const orderNumberRegex = /#([1-9]+)/;
+      const matches = userMessageLower.match(orderNumberRegex);
+
+      if (matches && matches[1]) {
+        const orderNumber = matches[1];
+        if (currentOrder === orderNumber) {
+          botMessage = `Order  #${orderNumber} has already been transferred.`;
+        } else {
+          currentOrder = orderNumber;
+          botMessage = `Order  #${orderNumber} acknowledged. Okay Case Transferred.`;
+        }
+      }
+
+      if (lastUserMessage === 'botname?' || lastUserMessage === 'botname' || lastUserMessage === 'chatbot') {
+        botMessage = 'My name is Hassan ' + botName;
+      }
+      Speech(botMessage);
+    }
+
+    function newEntry() {
+      if (document.getElementById("chatbox").value != "") {
+        lastUserMessage = document.getElementById("chatbox").value;
+        document.getElementById("chatbox").value = "";
+        messages.push(lastUserMessage);
+        chatbotResponse();
+        messages.push("<b>" + botName + ":</b> " + botMessage);
+        for (var i = 1; i < 8; i++) {
+          if (messages[messages.length - i])
+            document.getElementById("chatlog" + i).innerHTML = messages[messages.length - i];
+        }
+      }
+    }
+    
+     //text to Speech
+//https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API
+function Speech(say) {
+  if ('speechSynthesis' in window) {
+    var utterance = new SpeechSynthesisUtterance(say);
+    //utterance.volume = 1; // 0 to 1
+    //utterance.rate = 1; // 0.1 to 10
+    //utterance.pitch = 1; //0 to 2
+    //utterance.text = 'Hello World';
+    //utterance.lang = 'en-US';
+    speechSynthesis.speak(utterance);
+  }
+}
+
+//runs the keypress() function when a key is pressed
+document.onkeypress = keyPress;
+//if the key pressed is 'enter' runs the function newEntry()
+function keyPress(e) {
+  var x = e || window.event;
+  var key = (x.keyCode || x.which);
+  if (key == 13 || key == 3) {
+    //runs this function when enter is pressed
+    newEntry();
+  }
+}
+
+    document.getElementById('exitButton').addEventListener('click', function() {
+      document.getElementById('chatboarder').style.display = 'none';
+    });
+
+    document.getElementById('openChatButton').addEventListener('click', function() {
+      document.getElementById('chatboarder').style.display = 'block';
+    });
+
+    document.onkeypress = keyPress;
+  </script>
+</body>
+</html>
