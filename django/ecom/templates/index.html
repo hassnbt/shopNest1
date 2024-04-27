@@ -404,9 +404,11 @@
                                         {% for product in cosmetics_products %}
                                         <div class="col-md-6 col-lg-4 col-xl-3">
                                             <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="{{ product.image.url}}" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
+                                                  <a href="{% url 'productdetails' product_id=product.product_id %}">
+    <div class="fruite-img">
+        <img src="{{ product.image.url }}" class="img-fluid w-100 rounded-top" alt="">
+    </div>
+</a>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{product.category.name}}</div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                     <h4>{{ product.name }}</h4>
@@ -489,10 +491,11 @@
                                       
                                         <div class="col-md-6 col-lg-4 col-xl-3">
                                             <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="{{ product.image.url}}" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{product.category.name}}</div>
+                                                  
+    <div class="fruite-img">
+        <img src="{{ product.image.url }}" class="img-fluid w-100 rounded-top" alt="">
+    </div>
+                                      <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{product.category.name}}</div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                     <h4>{{ product.name }}</h4>
                                                     <p>{{ product.description }}</p>
@@ -556,9 +559,13 @@
                     <div class="col-lg-6 col-xl-4">
                         <div class="p-4 rounded bg-light">
                             <div class="row align-items-center">
-                                <div class="col-6">
+   <a href="{% url 'productdetails' product_id=product.product_id %}">
+    <div class="col-6">
                                     <img src="{{ product.image.url}}" class="img-fluid rounded-circle w-100" alt="">
                                 </div>
+</a>
+
+                               
                                 <div class="col-6">
                                     <a href="#" class="h5">{{ product.name }}</a>
                                     <div class="d-flex my-3">

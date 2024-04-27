@@ -466,7 +466,7 @@ def update_total_price(request):
     if request.method == 'GET':
         # Retrieve all cart items for the current user
         current_user = request.user.username
-        cart_items = CartItem.objects.filter(buyer=current_user)
+        cart_items = CartItem.objects.filter(buyer=current_user,status='pending')
         
         # Calculate total price for all items in the cart
         total_price = sum(item.quantity * item.product.price for item in cart_items)

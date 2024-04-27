@@ -179,10 +179,15 @@ body {
  
 {% for product in products %}
     <div class="product">
-      <img src="{{ product.image.url }}" alt="{{ product.name }}">  <div class="product-details">
+<a href="{% url 'productdetails' product_id=product.product_id %}">
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">  <div class="product-details">
+
+</a>
+
+
         <h3>{{ product.name }}</h3>
         <p>{{ product.description }}</p>
-        <div class="price">$ {{ product.price }}</div>  <button class="add-to-cart-btn">Add to Cart</button>
+        <div class="price">$ {{ product.price }}</div>  <button class="add-to-cart-btn" value={{product.product_id}} value1={{product.seller.name}} onclick="addtocart(this)">Add to Cart</button>
       </div>
     </div>
   {% endfor %}
@@ -191,6 +196,18 @@ body {
 </div></div></div>
 
 <!-- javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/lib/easing/easing.min.js"></script>
+    <script src="/static/assets/lib/waypoints/waypoints.min.js"></script>
+    <script src="/static/assets/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="/static/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/assets/js/main.js"></script>
+
+
+
 <script type="text/javascript">
 function search() {
 let filter = document.getElementById('find').value.toUpperCase();
@@ -207,6 +224,57 @@ else
 item[i].style.display="none";
 }
 }
+}
+
+
+function updateCartCount() {
+    $.ajax({
+        url: '{% url 'cart_count' %}',  // Update this URL based on your actual URL configuration
+        type: 'GET',
+        success: function(response) {
+            console.log('Cart count:', response.count);
+            $('#cartcoun').text(response.count); // Example: Update a span with id `cart-count`
+        },
+        error: function(error) {
+            console.log('Error fetching cart count:', error);
+        }
+    });
+}
+
+// Call updateCartCount on page load or after specific actions
+$(document).ready(function() {
+    updateCartCount();
+});
+
+function addtocart(element) {
+    // Extract product ID from the element's attributes
+    const productId = element.getAttribute('value');
+    const sellerName = element.getAttribute('value1');  // assuming these data attributes are correctly set
+debugger;
+    // AJAX request to the Django server
+    $.ajax({
+        url: '{% url 'add_to_cart' %}',  // URL to Django view (you will need to define this in urls.py)
+        type: 'POST',
+        data: {
+            'product_id': productId,
+            'quantity': 1,  // Example: add one item to cart, customize as needed
+            //'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()  // Handling CSRF token
+        },
+        success: function(response) {
+            debugger;
+    updateCartCount();
+
+            // Handle success
+            console.log('Item added to cart:', response);
+            //alert('Item added to cart!');
+        },
+        error: function(error) {
+            debugger;
+            // Handle errors
+            console.log('Error adding item to cart:', error);
+            alert('Failed to add item to cart.');
+        }
+    });
 }
 </script>
 </body>

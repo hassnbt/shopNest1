@@ -384,6 +384,7 @@ function updateTotalPrice() {
         url: '{% url 'update_total_price' %}', // URL of the Django view to recalculate total price
         type: 'GET',
         success: function(response) {
+            debugger;
             // If the recalculation is successful, update the total price displayed on the page
             $('#total-price').text('$'+response.total_price);
             $('#total-price1').text('$'+response.total_price);

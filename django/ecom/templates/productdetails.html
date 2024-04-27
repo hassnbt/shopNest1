@@ -165,29 +165,11 @@
                                 <h4 class="fw-bold mb-3">{{product.name}}</h4>
                                 <p class="mb-3">Category: {{product.category.name}}</p>
                                 <h5 class="fw-bold mb-3">{{product.price}} $</h5>
-                                <div class="d-flex mb-4">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
+                                
                                 <p class="mb-4">{{product.description}}</p>
                                 {% comment %} <p class="mb-4">Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish</p> {% endcomment %}
-                                <div class="input-group quantity mb-5" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" value={{product.product_id}}><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                               
+                                <a onclick="addtocart(this)" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" value="{{product.product_id}}" value1="{{product.seller.name}}"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                             </div>
                             <div class="col-lg-12">
                                 <nav>
@@ -732,7 +714,57 @@ function loadreview() {
     });
 }
                           
-                                 
+
+         function updateCartCount() {
+    $.ajax({
+        url: '{% url 'cart_count' %}',  // Update this URL based on your actual URL configuration
+        type: 'GET',
+        success: function(response) {
+            console.log('Cart count:', response.count);
+            $('#cartcoun').text(response.count); // Example: Update a span with id `cart-count`
+        },
+        error: function(error) {
+            console.log('Error fetching cart count:', error);
+        }
+    });
+}
+
+// Call updateCartCount on page load or after specific actions
+$(document).ready(function() {
+    updateCartCount();
+});
+
+function addtocart(element) {
+    // Extract product ID from the element's attributes
+    const productId = element.getAttribute('value');
+    const sellerName = element.getAttribute('value1');  // assuming these data attributes are correctly set
+debugger;
+    // AJAX request to the Django server
+    $.ajax({
+        url: '{% url 'add_to_cart' %}',  // URL to Django view (you will need to define this in urls.py)
+        type: 'POST',
+        data: {
+            'product_id': productId,
+            'quantity': 1,  // Example: add one item to cart, customize as needed
+            //'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()  // Handling CSRF token
+        },
+        success: function(response) {
+            debugger;
+    updateCartCount();
+
+            // Handle success
+            console.log('Item added to cart:', response);
+            //alert('Item added to cart!');
+        },
+        error: function(error) {
+            debugger;
+            // Handle errors
+            console.log('Error adding item to cart:', error);
+            alert('Failed to add item to cart.');
+        }
+    });
+}
+                        
                                  
                                  
                                  
