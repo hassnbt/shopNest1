@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--Stylesheet-->
     <style media="screen">
       *,
@@ -19,39 +20,9 @@
 body{
     background-color: solid white;
 }
-.background{
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-}
-.background .shape{
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    border-radius: 50%;
-}
-.shape:first-child{
-    background: linear-gradient(
-        /* #1845ad,
-        #23a2f6 */
-    );
-    left: -80px;
-    top: -80px;
-}
-.shape:last-child{
-    background: linear-gradient(
-        /* to right,
-        #ff512f,
-        #f09819 */
-    );
-    right: -30px;
-    bottom: -80px;
-}
+
 form {
-  height: 600px;
+  height: 610px;
   width: 450px;
   background-color: rgba(255,255,255,0.13);
   position: absolute;
@@ -62,10 +33,19 @@ form {
   backdrop-filter: blur(10px);
   border: 1px solid  #fd7e14;
   box-shadow: 0 0 40px rgba(8,7,16,0.6);
-  padding: 15px 35px;
+  padding: 5px 35px;
   transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
 }
-
+form .icon {
+  font-size: 24px;
+  padding: 3px;
+  position: relative;
+  top: 24px;
+  left: 68px;
+}
+form .icon i{
+ color:#fd7e14;
+}
 form:hover {
   box-shadow: #fd7e14 ; /* Orange shadow on hover */
 }
@@ -80,14 +60,14 @@ form *{
 form h3{
     font-size: 32px;
     font-weight: 1000;
-    line-height: 50px;
+    line-height: 3px;
     text-align: center;
     color:#679d06 ;
 }
 form h2{
     font-size: 15px;
     font-weight: 700;
-    line-height: 25px;
+    line-height: 55px;
     text-align: center;
 }
 
@@ -155,11 +135,11 @@ button:hover {
     </style>
 </head>
 <body>
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
+    
    <form action="" method="post">
+    <div class="icon">
+      <i class="fa-solid fa-crow"></i>
+      </div>
     {% csrf_token %} 
     <h3>ShopNest</h3>
     <h2>Signup Here</h2>

@@ -3,7 +3,7 @@
 <head>
   <!-- Design by foolishdeveloper.com -->
     <title>Login Page</title>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -19,42 +19,10 @@
 }
 
 body{
-    background-color:solid white
+    background-color:solid white;
 }
-.background {
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-    /* background-image: url("/static/assets/images/backImg.jpg");  */
-    /* Add the path to your image here */
-    background-size: cover; /* Adjust the background size as needed */
-}
-.background .shape{
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    border-radius: 50%;
-}
-.shape:first-child{
-    background: linear-gradient(
-        /* #1845ad,
-        #23a2f6 */
-    );
-    left: -80px;
-    top: -80px;
-}
-.shape:last-child{
-    background: linear-gradient(
-        to right,
-        /* #ff512f,
-        #f09819 */
-    );
-    right: -30px;
-    bottom: -80px;
-}
+
+
 form{
     height: 520px;
     width: 400px;
@@ -67,10 +35,19 @@ form{
     /* backdrop-filter: blur(10px); */
     border: 1px solid  #fd7e14;
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
+    padding: 30px 35px;
     transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
 }
-
+form .icon {
+  font-size: 24px;
+  padding: 3px;
+  position: relative;
+  top: 47px;
+  left: 45px;
+}
+form .icon i{
+ color:#fd7e14;
+}
 form:hover {
   box-shadow: #fd7e14 ; /* Orange shadow on hover */
 }
@@ -159,11 +136,12 @@ button:hover {
     </style>
 </head>
 <body>
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
+    
+   
     <form method="post">
+        <div class="icon">
+        <i class="fa-solid fa-crow"></i>
+        </div>
         <!-- <img src="/django/ecom/static/assets/img/nest_3716178.png" alt="Icon Description" /> -->
         <h3>ShopNest</h3>
         <h2>Login Here</h2>
