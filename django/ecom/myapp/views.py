@@ -558,7 +558,8 @@ def get_seller_productsd(request):
     except Seller.DoesNotExist:
         return JsonResponse({'error': 'Seller not found'}, status=404)
     seller_cart_item_ids = CartItem.objects.filter(product__seller__name=current_seller, status='ordered').values_list('product_id', flat=True)
-
+    buyer_cart_item_ids = CartItem.objects.filter(product__seller__name=current_seller, status='ordered').values_list('buyer', flat=True)
+    
     # Query products for the current seller that have associated cart items with status 'ordered'
     seller_products = products1.objects.filter(seller=current_seller, product_id__in=seller_cart_item_ids)
     
