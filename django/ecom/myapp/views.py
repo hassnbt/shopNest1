@@ -605,7 +605,66 @@ def delete_product(request):
 def productdetails(request,product_id):
 
     product=products1.objects.get(product_id=product_id)
-    return render(request,"productdetails.html",{'product':product})  
+
+
+    all_products = products1.objects.all()
+    
+    # Initialize list to store electronic products
+    
+        
+    electronic_products = []
+    sports_products = []
+    groceries_products = []
+    perfume_products = []
+    clothing_products = []
+    quantity1=0
+    quantity2=0
+    quantity3=0
+    quantity4=0
+    quantity5=0
+    
+    # Separate products into different categories based on conditions
+    for pproduct in all_products:
+        if pproduct.category.name == 'Electronic':
+            electronic_products.append(pproduct)
+             # Calculate the quantity of electronic products
+            quantity1 = len(electronic_products)
+
+
+        elif pproduct.category.name == 'Groceries':
+            groceries_products.append(pproduct)
+            quantity3 = len(groceries_products)
+        
+        elif pproduct.category.name == 'Sports':
+            sports_products.append(pproduct)
+            quantity2 = len(sports_products)
+
+        
+        elif pproduct.category.name == 'perfume':
+            perfume_products.append(pproduct)
+            quantity4 = len(perfume_products)
+        
+        elif pproduct.category.name == 'Clothing':
+            clothing_products.append(pproduct)
+            quantity5 = len(clothing_products)
+
+   
+      
+    return render(request,"productdetails.html", {
+        'product': product,
+        'quantity1': quantity1,
+        'quantity2': quantity2,
+        'quantity3': quantity3,
+        'quantity4': quantity4,
+        'quantity5': quantity5,
+        'quantity1': quantity1,
+        'quantity2': quantity2,
+        'quantity3': quantity3,
+        'quantity4': quantity4,
+        'quantity5': quantity5,
+    })
+    
+    # return render(request,"productdetails.html",{'product':product})  
 
 # views.py
 
