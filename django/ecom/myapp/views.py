@@ -67,20 +67,23 @@ def home(request):
     
     # Initialize dictionaries to store products for each category
     electronic_products = []
-    cosmetics_products = []
+    clothing_products = []
     groceries_products = []
-    toys_products = []
+    cricket_products = []
+    other_products = []
 
     # Separate products into different categories based on conditions
     for product in all_products:
         if product.category.name == 'Electronic':
             electronic_products.append(product)
-        elif product.category.name == 'Cosmetics':
-            cosmetics_products.append(product)
+        elif product.category.name == 'Clothing':
+            clothing_products.append(product)
+        elif product.category.name == 'Others':
+            other_products.append(product)
         elif product.category.name == 'Groceries':
             groceries_products.append(product)
-        elif product.category.name == 'Toys':
-            toys_products.append(product)
+        elif product.category.name == 'Sports':
+            cricket_products.append(product)
         
     # Check if the user exists in the Seller table
     user_exists = Seller.objects.filter(name=request.user.username).exists()
@@ -182,10 +185,11 @@ def home(request):
        # 'top_5_products':top_5_products,
         'all_products': all_products,
         'electronic_products': electronic_products,
-        'cosmetics_products': cosmetics_products,
+        'clothing_products': clothing_products,
         'groceries_products': groceries_products,
+        'other_products': other_products,
         'all_products': all_products,
-        'toys_products':toys_products ,
+        'cricket_products':cricket_products ,
         'user_exists': user_exists
         
     })
@@ -293,13 +297,15 @@ def shop_detail(request):
     
         
     electronic_products = []
-    cosmetics_products = []
+    sports_products = []
     groceries_products = []
-    toys_products = []
+    perfume_products = []
+    clothing_products = []
     quantity1=0
     quantity2=0
     quantity3=0
     quantity4=0
+    quantity5=0
     
     # Separate products into different categories based on conditions
     for product in all_products:
@@ -308,19 +314,23 @@ def shop_detail(request):
              # Calculate the quantity of electronic products
             quantity1 = len(electronic_products)
 
-        elif product.category.name == 'Cosmetics':
-            cosmetics_products.append(product)
-            quantity2 = len(cosmetics_products)
-
 
         elif product.category.name == 'Groceries':
             groceries_products.append(product)
             quantity3 = len(groceries_products)
+        
+        elif product.category.name == 'Sports':
+            sports_products.append(product)
+            quantity2 = len(sports_products)
 
         
-        elif product.category.name == 'Toys':
-            toys_products.append(product)
-            quantity4 = len(toys_products)
+        elif product.category.name == 'perfume':
+            perfume_products.append(product)
+            quantity4 = len(perfume_products)
+        
+        elif product.category.name == 'Clothing':
+            clothing_products.append(product)
+            quantity5 = len(clothing_products)
 
    
       
@@ -331,6 +341,7 @@ def shop_detail(request):
         'quantity2': quantity2,
         'quantity3': quantity3,
         'quantity4': quantity4,
+        'quantity5': quantity5,
     })
 
 def test(request):
