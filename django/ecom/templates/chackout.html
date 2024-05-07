@@ -28,141 +28,18 @@
 
         <!-- Template Stylesheet -->
         <link href="/static/assets/css/style.css" rel="stylesheet">
-
         <style>
-            /* body {
-              font: 15px arial, sans-serif;
-              background-color: #d9d9d9;
-              padding-top: 15px;
-              padding-bottom: 15px;
-            }
-        
-            #bodybox {
-              position: relative;
-              margin: auto;
-              max-width: 550px;
-              font: 15px arial, sans-serif;
-              background-color: white;
-              border-style: solid;
-              border-width: 1px;
-              padding-top: 20px;
-              padding-bottom: 25px;
-              padding-right: 25px;
-              padding-left: 25px;
-              box-shadow: 5px 5px 5px grey;
-              border-radius: 15px;
-            } */
-        
-            #chatboarder {
-              position: fixed;
-              bottom: 20px;
-              right: 20px;
-              border-style: solid;
-              background-color: #f6f9f6;
-              border:2px solid #FFB524;
-              border-width: 3px;
-              padding-top: 5px;
-              padding-bottom: 15px;
-              padding-right: 20px;
-              padding-left: 15px;
-              border-radius: 15px;
-              transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
-            }
-            #chatboarder:hover {
-             border:2px solid #FFB524;
-             box-shadow:0px 0px 10px 10px  #FFB524; /* Add shadow effect on hover */
-            }
-            #chatboarder .chatbox-heading {
-              text-align: center;
-              display: block;
-              font-size: 1.5em;
-              margin-block-start: 0.83em;
-              margin-block-end: 0.83em;
-              margin-inline-start: 0px;
-              margin-inline-end: 0px;
-              font-weight: bold;
-             unicode-bidi: isolate;
-            }
-            #chatboarder .chatbox-info {
-            text-align: center;
-            color: blueviolet;
-            font-size: small;
-           }
-        
-            .chatlog {
-              font: 15px arial, sans-serif;
-            }
-        
-            #chatbox {
-              font: 15px arial, sans-serif;
-              height: 22px;
-              width: 100%;
-              border-radius: 2px;
-            }
-        
-            h1 {
-              margin: auto;
-            }
-        
-            pre {
-              background-color: #f0f0f0;
-              margin-left: 20px;
-            }
-        
-            .exitButton {
-              position: absolute;
-              top: 10px;
-              right: 10px;
-              padding: 5px 10px;
-              background-color: #ff0000;
-              color: #ffffff;
-              border: none;
-              border-radius: 5px;
-              cursor: pointer;
-            }
-        
-            .exitButton:hover {
-              background-color: #cc0000;
-            }
-        
-            .chatButton {
-              position: fixed;
-              bottom: 20px;
-              right: 20px;
-              padding: 10px 20px;
-              background-color: #007bff;
-              color: #ffffff;
-              border: none;
-              border-radius: 5px;
-              cursor: pointer;
-            }
-        
-            .chatButton:hover {
-              background-color: #0056b3;
-            }
-            .kkchatt{
-                background-color: #679d06;
-                color: #ffffff; 
-                border: 1px solid #679d06;
-                border-radius: 5px;
-            }
-            .kkchatt:hover{
-                background-color:#dc3545 ;
-                border: 1px solid #dc3545;
-                border-radius: 5px;
-
-            }
             .container .icon {
-             /* Your styles for the icon */
-             font-size: 30px;
-             padding: 10px;
-             position: relative;
-             bottom: 4px;
-             }
-             .container .icon i{
-             color:#fd7e14;
-             }
-          </style>
+           /* Your styles for the icon */
+           font-size: 30px;
+           padding: 10px;
+           position: relative;
+           bottom: 4px;
+           }
+           .container .icon i{
+               color:#fd7e14;
+           }
+           </style> 
     </head>
 
     <body>
@@ -203,22 +80,21 @@
                         <div class="navbar-nav mx-auto">
                             <a  href="{% url 'home' %}" class="nav-item nav-link">Home</a>
                             {% if user_exists %}
-   <a href="{% url 'add_product' %}" class="nav-item nav-link">Shop</a>
-                            <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
-   <a  href="{% url 'shop' %}" class="nav-item nav-link">Shop</a>
+                            <a href="{% url 'add_product' %}" class="nav-item nav-link">Shop</a>
                             <a href="{% url 'shop_detail' %}" class="nav-item nav-link">Shop Detail</a>
+   
 {% endif %}
                             
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                     <a href="{% url 'cart' %}" class="dropdown-item">Cart</a>
-                                    <a href="{% url 'chackout' %}"class="dropdown-item">Chackout</a>
-                                    <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
+                                    <a href="{% url 'chackout' %}"class="dropdown-item active">Chackout</a>
+                                    <a href="{% url 'testimonial' %}" class="dropdown-item ">Testimonial</a>
                                     <a href="{% url 'test' %}" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
-                            <a href="{% url 'contact' %}" class="nav-item nav-link active">Contact</a>
+                            <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="d-flex m-2 me-0">
                             <a href="{% url 'search' %}">
@@ -255,7 +131,7 @@
 
 
         <!-- Modal Search Start -->
-        <!-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content rounded-0">
                     <div class="modal-header">
@@ -270,199 +146,215 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- Modal Search End -->
 
 
         <!-- Single Page Header start -->
         <div class="container-fluid page-header py-5">
-            <h1 class="text-center text-white display-6">Contact</h1>
+            <h1 class="text-center text-white display-6">Checkout</h1>
             <ol class="breadcrumb justify-content-center mb-0">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active text-white">Contact</li>
+                <li class="breadcrumb-item active text-white">Checkout</li>
             </ol>
         </div>
         <!-- Single Page Header End -->
 
 
-        <!-- Contact Start -->
-        <div class="container-fluid contact py-5">
+        <!-- Checkout Page Start -->
+        <div class="container-fluid py-5">
             <div class="container py-5">
-                <div class="p-5 bg-light rounded">
-                    <div class="row g-4">
-                        <div class="col-12">
-                            <div class="text-center mx-auto" style="max-width: 700px;">
-                                <h1 class="text-primary">Get in touch</h1>
-                                <p class="mb-4">Have a question or need assistance? We're here to help! Reach out to us and our dedicated team will be happy to assist you.</p>
-                                <button  class="mb-4 openChatButton kkchatt">CHATBOT </button>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="h-100 rounded">
-                                <iframe class="rounded w-100" 
-                                style="height: 400px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.5513466616344!2d74.30043917486847!3d31.481525749061543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391903f08ebc7e8b%3A0x47e934f4cd34790!2sFAST%20NUCES%20Lahore!5e0!3m2!1sen!2s!4v1714144292400!5m2!1sen!2s" 
-                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-
-                            <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.5513466616344!2d74.30043917486847!3d31.481525749061543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391903f08ebc7e8b%3A0x47e934f4cd34790!2sFAST%20NUCES%20Lahore!5e0!3m2!1sen!2s!4v1714144292400!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-
-
-
-
-                        </div>
-                        <div class="col-lg-7">
-                            <form action="" class="">
-                                <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name">
-                                <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email">
-                                <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Your Message"></textarea>
-                                <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit">Submit</button>
-                            </form>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="d-flex p-4 rounded mb-4 bg-white">
-                                <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
-                                <div>
-                                    <h4>Address</h4>
-                                    <p class="mb-2">Fast Nuces Lahore.Pakistan</p>
+                <h1 class="mb-4">Billing details</h1>
+                <form id="orderForm">
+                    <div class="row g-5">
+                        <div class="col-md-12 col-lg-6 col-xl-7">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3">First Name<sup>*</sup></label>
+                                        <input type="text" class="form-control"  name="firstname">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3">Last Name<sup>*</sup></label>
+                                        <input type="text" class="form-control"  name="lastname">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="d-flex p-4 rounded mb-4 bg-white">
-                                <i class="fas fa-envelope fa-2x text-primary me-4"></i>
-                                <div>
-                                    <h4>Mail Us</h4>
-                                    <p class="mb-2">ShopNest@gmail.com</p>
-                                </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Company Name<sup>*</sup></label>
+                                <input type="text" class="form-control" name="company">
                             </div>
-                            <div class="d-flex p-4 rounded bg-white">
-                                <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
-                                <div>
-                                    <h4>Telephone</h4>
-                                    <p class="mb-2">(+012) 3456 7890</p>
-                                </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Address <sup>*</sup></label>
+                                <input type="text" class="form-control" placeholder="House Number Street Name" name="address">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Town/City<sup>*</sup></label>
+                                <input type="text" class="form-control" name="city">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Country<sup>*</sup></label>
+                                <input type="text" class="form-control"  name="country">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Postcode/Zip<sup>*</sup></label>
+                                <input type="text" class="form-control" name="postcode">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Mobile<sup>*</sup></label>
+                                <input type="tel" class="form-control" name="mobile">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Email Address<sup>*</sup></label>
+                                <input type="email" class="form-control" name="email">
+                            </div>
+                           
+                            <div class="form-item">
+                                <textarea class="form-control" name="ordernotes" spellcheck="false" cols="30" rows="11" placeholder="Oreder Notes (Optional)"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-xl-5">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Products</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       {% for cart_item in cart_items %}
+                    {% comment %} <div id="cartidd"value="{{cart_item.id}}" ></div> {% endcomment %}
+                    <tr>
+                        <th scope="row">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ cart_item.product.image.url }}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                            </div>
+                        </th>
+                        <td>
+                            <p class="mb-0 mt-4">{{ cart_item.product.name }}</p>
+                        </td>
+                        <td>
+                            <p id="pr" class="mb-0 mt-4">${{ cart_item.product.price }}</p>
+                        </td>
+                        <td>
+                        
+
+ <p class="mb-0 mt-4">{{ cart_item.quantity }}</p>
+                        </td>
+                        <td>
+                            <p class="mb-0 mt-4">${{ cart_item.total_price }}</p>
+                        </td>
+                       
+                    </tr>
+                    {% endfor %}
+                                      
+                                    
+                                        <tr>
+                                            <th scope="row">
+                                            </th>
+                                            <td class="py-5"></td>
+                                            <td class="py-5"></td>
+                                            <td class="py-5">
+                                                <p class="mb-0 text-dark py-3">Subtotal</p>
+                                            </td>
+                                            <td class="py-5">
+                                                <div class="py-3 border-bottom border-top">
+                                                    <p class="mb-0 text-dark">${{ total_price }}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                            </th>
+                                            <td class="py-5">
+                                                <p id="total-price" class="mb-0 text-dark py-4">Shipping</p>
+                                            </td>
+                                           <td colspan="3" class="py-5">
+    <div class="form-check text-start">
+        <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-1" name="shipping_method" value="0">
+        <label class="form-check-label" for="Shipping-1">Free Shipping</label>
+    </div>
+    <div class="form-check text-start">
+        <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-2" name="shipping_method" value="15">
+        <label class="form-check-label" for="Shipping-2">Flat rate: $15.00</label>
+    </div>
+    <div class="form-check text-start">
+        <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-3" name="shipping_method" value="8">
+        <label class="form-check-label" for="Shipping-3">Local Pickup: $8.00</label>
+    </div>
+</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                            </th>
+                                            <td class="py-5">
+                                                <p class="mb-0 text-dark text-uppercase py-3">TOTAL</p>
+                                            </td>
+                                            <td class="py-5"></td>
+                                            <td class="py-5"></td>
+                                            <td class="py-5">
+                                                <div class="py-3 border-bottom border-top">
+                                                    <p class="mb-0 text-dark">${{total_price}}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                         <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
+    <div class="col-12">
+        <div class="form-check text-start my-3">
+            <input type="radio" class="form-check-input bg-primary border-0" id="Transfer-1" name="payment_method" value="DirectBankTransfer">
+            <label class="form-check-label" for="Transfer-1">Direct Bank Transfer</label>
+        </div>
+        <p class="text-start text-dark">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+    </div>
+</div>
+<div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
+    <div class="col-12">
+        <div class="form-check text-start my-3">
+            <input type="radio" class="form-check-input bg-primary border-0" id="Payments-1" name="payment_method" value="CheckPayments">
+            <label class="form-check-label" for="Payments-1">Check Payments</label>
+        </div>
+    </div>
+</div>
+<div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
+    <div class="col-12">
+        <div class="form-check text-start my-3">
+            <input type="radio" class="form-check-input bg-primary border-0" id="Delivery-1" name="payment_method" value="CashOnDelivery">
+            <label class="form-check-label" for="Delivery-1">Cash On Delivery</label>
+        </div>
+    </div>
+</div>
+<div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
+    <div class="col-12">
+        <div class="form-check text-start my-3">
+            <input type="radio" class="form-check-input bg-primary border-0" id="Paypal-1" name="payment_method" value="Paypal">
+            <label class="form-check-label" for="Paypal-1">Paypal</label>
+        </div>
+    </div>
+</div>
+
+                            <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                                <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Place Order</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
-        <!-- Contact End -->
-        <div class="container-fluid testimonial py-5">
-            <div class="container py-5">
-                <div class="testimonial-header text-center">
-                    <h4 class="text-primary"></h4>
-                    <h1 class="display-5 mb-5 text-dark">Our Team!</h1>
-                </div>
-                <div class="owl-carousel testimonial-carousel">
-                    <div class="testimonial-item img-border-radius bg-light rounded p-4">
-                        <div class="position-relative">
-                            <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
-                            <!-- <div class="mb-4 pb-4 border-bottom border-secondary">
-                                <p class="mb-0">Orignal Goldleaf delivered within a week, love you ShopNest!,
-                                </p>
-                            </div> -->
-                            <div class="d-flex align-items-center flex-nowrap">
-                                <div class="bg-secondary rounded">
-                                    <img src="/static/assets/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
-                                </div>
-                                <div class="ms-4 d-block">
-                                    <h4 class="text-dark">Hassan Butt</h4>
-                                    <p class="m-0 pb-3">Back-end Developer</p>
-                                    <!-- <div class="d-flex pe-5">
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-item img-border-radius bg-light rounded p-4">
-                        <div class="position-relative">
-                            <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
-                            <!-- <div class="mb-4 pb-4 border-bottom border-secondary">
-                                <p class="mb-0">JV iPhone 11 working great, bought it in great price,
-                                </p>
-                            </div> -->
-                            <div class="d-flex align-items-center flex-nowrap">
-                                <div class="bg-secondary rounded">
-                                    <img src="/static/assets/img/cbl.jpeg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
-                                </div>
-                                <div class="ms-4 d-block">
-                                    <h4 class="text-dark">Fazeel Khalid</h4>
-                                    <p class="m-0 pb-3">Front-end Developer</p>
-                                    <!-- <div class="d-flex pe-5">
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-item img-border-radius bg-light rounded p-4">
-                        <div class="position-relative">
-                            <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
-                            <!-- <div class="mb-4 pb-4 border-bottom border-secondary">
-                                <p class="mb-0">JV iPhone 11 working great, bought it in great price,
-                                </p>
-                            </div> -->
-                            <div class="d-flex align-items-center flex-nowrap">
-                                <div class="bg-secondary rounded">
-                                    <img src="/static/assets/img/ub.jpeg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
-                                </div>
-                                <div class="ms-4 d-block">
-                                    <h4 class="text-dark">Umer Bashir</h4>
-                                    <p class="m-0 pb-3">Full-Stack</p>
-                                    <!-- <div class="d-flex pe-5">
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item img-border-radius bg-light rounded p-4">
-                        <div class="position-relative">
-                            <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
-                            <!-- <div class="mb-4 pb-4 border-bottom border-secondary">
-                                <p class="mb-0">Daily Grocery yahi se mngwata hu,
-                                </p>
-                            </div> -->
-                            <div class="d-flex align-items-center flex-nowrap">
-                                <div class="bg-secondary rounded">
-                                    <img src="/static/assets/img/ahs.jpeg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
-                                </div>
-                                <div class="ms-4 d-block">
-                                    <h4 class="text-dark">Ahsan Shafi</h4>
-                                    <p class="m-0 pb-3">All-Rounder</p>
-                                    <!-- <div class="d-flex pe-5">
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                        <i class="fas fa-star text-primary"></i>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        <!-- Tastimonial End -->
+        <!-- Checkout Page End -->
 
 
+        <!-- Footer Start -->
         {% include "footer.html" %}
 
         <!-- Copyright Start -->
@@ -470,13 +362,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        <span class="text-light"><i class="fas fa-copyright text-light me-2"></i>www.ShopNest.com</a>, All right reserved.</span>
+                        <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-end text-white">
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                         <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                         <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom" href="">Quantum Developers</a>
+                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
                     </div>
                 </div>
             </div>
@@ -486,25 +378,8 @@
 
 
         <!-- Back to Top -->
-        <!-- <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>    -->
-        <button class="chatButton openChatButton">Open Chat</button>
+        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
 
-        <div id='chatboarder' style="display: none;">
-            <h2 class="chatbox-heading">ChatBox</h2>
-            <p class="chatbox-info">You May Start conversation with "Hi"</p>
-            <p class="chatbox-info">For Order Number just Input Order Number in #XXX format</p>
-            <p class="chatbox-info">Don't Misbehave ChatBot is bit aggressive</p>
-            <p class="chatbox-info">To End conversation just Type "Exit"</p>
-            <p id="chatlog7" class="chatlog">&nbsp;</p>
-            <p id="chatlog6" class="chatlog">&nbsp;</p>
-            <p id="chatlog5" class="chatlog">&nbsp;</p>
-            <p id="chatlog4" class="chatlog">&nbsp;</p>
-            <p id="chatlog3" class="chatlog">&nbsp;</p>
-            <p id="chatlog2" class="chatlog">&nbsp;</p>
-            <p id="chatlog1" class="chatlog">&nbsp;</p>
-            <input type="text" name="chat" id="chatbox">
-            <button id="exitButton" class="exitButton">Exit</button>
-          </div>
         
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -516,113 +391,150 @@
 
     <!-- Template Javascript -->
     <script src="/static/assets/js/main.js"></script>
-
-    <script>
-        var messages = [],
-          lastUserMessage = "",
-          botMessage = "",
-          botName = 'Butt';
-    
-        let currentOrder = '';
-    
-        function chatbotResponse() {
-          var userMessageLower = lastUserMessage.replace(/[^a-zA-Z0-9#]/g, '').toLowerCase();
-    
-          botMessage = "I'm confused...";
-    
-          if (userMessageLower.includes('hi') || userMessageLower.includes('aoa')) {
-            botMessage = 'Dear Customer, How can we facilitate you?';
-          }
-          if (userMessageLower.includes('exit')) {
-            botMessage = 'Have a great day!';
-          }
-          if (userMessageLower.includes('order') || userMessageLower.includes('return') || userMessageLower.includes('exchange') || userMessageLower.includes('ordered') || userMessageLower.includes('refund')) {
-            botMessage = 'Plz Share Order Number!';
-          }
-        //   if (userMessageLower.includes('bc') || userMessageLower.includes('ghandu') || userMessageLower.includes('lora') || userMessageLower.includes('benchod') || userMessageLower.includes('yakki')) {
-        //     botMessage = 'Behn K Lorray , Tameez say baat ker!';
-        //   }
-        //   if (userMessageLower.includes('fuck') || userMessageLower.includes('shitt') || userMessageLower.includes('dickhead') || userMessageLower.includes('idiot') || userMessageLower.includes('shutup')) {
-        //     botMessage = 'Mother Fucker Dont Cross Limits, Talk Respectfully !';
-        //   }
-          
-          const orderNumberRegex = /#([1-9]+)/;
-          const matches = userMessageLower.match(orderNumberRegex);
-    
-          if (matches && matches[1]) {
-            const orderNumber = matches[1];
-            if (currentOrder === orderNumber) {
-              botMessage = `Order  #${orderNumber} has already been transferred.`;
-            } else {
-              currentOrder = orderNumber;
-              botMessage = `Order  #${orderNumber} acknowledged. Okay Case Transferred.`;
-            }
-          }
-    
-          if (lastUserMessage === 'botname?' || lastUserMessage === 'botname' || lastUserMessage === 'chatbot') {
-            botMessage = 'My name is Hassan ' + botName;
-          }
-          Speech(botMessage);
-        }
-    
-        function newEntry() {
-          if (document.getElementById("chatbox").value != "") {
-            lastUserMessage = document.getElementById("chatbox").value;
-            document.getElementById("chatbox").value = "";
-            messages.push(lastUserMessage);
-            chatbotResponse();
-            messages.push("<b>" + botName + ":</b> " + botMessage);
-            for (var i = 1; i < 8; i++) {
-              if (messages[messages.length - i])
-                document.getElementById("chatlog" + i).innerHTML = messages[messages.length - i];
-            }
-          }
-        }
-        
-         //text to Speech
-    //https://developers.google.com/web/updates/2014/01/Web-apps-that-talk-Introduction-to-the-Speech-Synthesis-API
-    function Speech(say) {
-      if ('speechSynthesis' in window) {
-        var utterance = new SpeechSynthesisUtterance(say);
-        //utterance.volume = 1; // 0 to 1
-        //utterance.rate = 1; // 0.1 to 10
-        //utterance.pitch = 1; //0 to 2
-        //utterance.text = 'Hello World';
-        //utterance.lang = 'en-US';
-        speechSynthesis.speak(utterance);
-      }
-    }
-    
-    //runs the keypress() function when a key is pressed
-    document.onkeypress = keyPress;
-    //if the key pressed is 'enter' runs the function newEntry()
-    function keyPress(e) {
-      var x = e || window.event;
-      var key = (x.keyCode || x.which);
-      if (key == 13 || key == 3) {
-        //runs this function when enter is pressed
-        newEntry();
-      }
-    }
-    
-        document.getElementById('exitButton').addEventListener('click', function() {
-          document.getElementById('chatboarder').style.display = 'none';
-        });
-    
-        // document.getElementById('openChatButton').addEventListener('click', function() {
-        //   document.getElementById('chatboarder').style.display = 'block';
-        // });
-        var openChatButtons = document.querySelectorAll('.openChatButton');
-
-         // Loop through each button and attach an event listener to it
-        openChatButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-        document.getElementById('chatboarder').style.display = 'block';
-        });
-});
-    
-        document.onkeypress = keyPress;
-      </script>
     </body>
 
 </html>
+<script>
+$(document).ready(function() {
+    updateCartCount();
+});
+function updateCartCount() {
+    $.ajax({
+        url: '{% url 'cart_count' %}',  // Update this URL based on your actual URL configuration
+        type: 'GET',
+        success: function(response) {
+            console.log('Cart count:', response.count);
+            $('#cartcoun').text(response.count); // Example: Update a span with id `cart-count`
+        },
+        error: function(error) {
+            console.log('Error fetching cart count:', error);
+        }
+    });
+}
+
+// Call updateCartCount on page load or after specific actions
+
+
+function delcartitem(button) {
+    debugger;
+    var cartItemId = button.value; // Get the cart item ID
+    $.ajax({
+        url: '{% url 'delete_cart_item' %}', // URL of the Django view
+        type: 'POST',
+        data: {
+            'cart_item_id': cartItemId // Pass the cart item ID as data
+        },
+        success: function(response) {
+            // If the deletion is successful, remove the corresponding cart item from the DOM
+            $(button).closest('tr').remove();
+            updateCartCount();
+            updateTotalPrice();
+        },
+        error: function(xhr, errmsg, err) {
+            console.log(errmsg); // Log any errors to the console
+        }
+    });
+}
+$(document).ready(function() {
+    // Add event listener to quantity input fields
+    $(document).on('change', '.quantity-input', function() {
+        updateCartItemQuantity(this); // Call the update function when quantity changes
+    });
+
+    // Add event listener to minus buttons
+    $(document).on('click', '.btn-minus', function() {
+        var inputField = $(this).closest('.input-group').find('.quantity-input');
+        var newValue = parseInt(inputField.val());
+        inputField.val(newValue).change(); // Trigger change event after updating value
+    });
+
+    // Add event listener to plus buttons
+    $(document).on('click', '.btn-plus', function() {
+        var inputField = $(this).closest('.input-group').find('.quantity-input');
+        var newValue = parseInt(inputField.val());
+        inputField.val(newValue).change(); // Trigger change event after updating value
+    });
+});
+
+// Function to update cart item quantity
+function updateCartItemQuantity(inputField) {
+    var cartItemId = $(inputField).data('cart-item-id');
+    var newQuantity = $(inputField).val();
+
+    // Send AJAX request to update quantity
+    $.ajax({
+        url: '{% url 'update_cart_item_quantity' %}', // URL of the Django view to update quantity
+        type: 'POST',
+        data: {
+            'cart_item_id': cartItemId,
+            'quantity': newQuantity
+        },
+        success: function(response) {
+             if (response.success) {
+                debugger;
+              // updateTotalPrice1();
+                 updateTotalPrice();
+                console.log('Quantity updated successfully');
+            } else {
+                // Quantity update failed, display error message
+                console.log('Error updating quantity:', response.error);
+                if (response.max_quantity) {
+                    // Optionally update input field with maximum available quantity
+                    $(inputField).val(response.max_quantity);
+                }
+            }
+            // Handle success if necessary
+          
+           //alert(response);
+            console.log('Quantity updated successfully');
+        },
+        error: function(xhr, errmsg, err) {
+            alert(errmsg);
+            console.log(errmsg); // Log any errors to the console
+        }
+    });
+}
+
+function updateTotalPrice() {
+    $.ajax({
+        url: '{% url 'update_total_price' %}', // URL of the Django view to recalculate total price
+        type: 'GET',
+        success: function(response) {
+            // If the recalculation is successful, update the total price displayed on the page
+            $('#total-price').text(response.total_price);
+            $('#total-price1').text(response.total_price+300);
+
+        },
+        error: function(xhr, errmsg, err) {
+            console.log(errmsg); // Log any errors to the console
+        }
+    });
+}
+$(document).ready(function() {
+    $('#orderForm').submit(function(event) {
+      // Prevent the form from submitting normally
+      event.preventDefault();
+      debugger;
+      // Collect form data
+      var formData = $(this).serialize();
+      
+      // Send form data to backend using AJAX
+      $.ajax({
+        type: 'POST',
+        url: '{% url 'submit_order' %}',  // Replace 'save_order' with the URL of your Django view
+        data: formData,
+        success: function(response) {
+          // Handle success response
+          // For example, display a success message
+          updateCartCount();
+          alert('Order placed successfully!');
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          // Handle error response
+          // For example, display an error message
+          alert('Error placing order. Please try again later.');
+        }
+      });
+    });
+  });
+</script>
