@@ -1,281 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Seach ShopNest</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
-
-<style type="text/css">
-   *
-{
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-}
-
-body {
-    background: #ddd;
-    border: 5px solid #000; /* Adds a border around the entire page */
-    margin: 0; /* Removes the default margin */
-    box-sizing: border-box; /* Includes the border in the element's total width and height */
-}
-
-.container-fluid {
-    width: 100%;
-    height: auto;
-    padding: 0px 0px 80px 0px;
-}
-
-.container {
-    width: 1200px;
-    height: auto;
-    margin: auto;
-}
-
-.container .search {
-    display: flex;
-    padding: 30px 200px;
-    justify-content: space-between;
-}
-
-.container .search h1 {
-    color: #679d06; /* Sets the color of the 'Search ShopNest' text */
-    font-weight: bold; /* Makes the font bold */
-    letter-spacing: 3px;
-    display: inline-block;
-    border-bottom: 2px solid #dc3545;
-    padding-bottom: 10px;
-}
-
-.container .search input {
-    width: 60%;
-    padding: 5px 16px;
-    background: transparent;
-    border: 1px solid #FFB524;
-    font-size: 20px;
-    text-transform: capitalize;
-    letter-spacing: 3px;
-    outline: none;
-    border-radius: 15px;
-}
-
-.container .search input::placeholder {
-    color: #679d06;
-    font-weight: 500;
-}
-
-.container .product-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
-}
-
-.container .product-list .product {
-  background: #fff;
-  border: 1px solid #FFB524; /* Orange border */
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Existing shadow */
-  margin: 10px;
-  width: 250px; /* Adjust the width as needed */
-  overflow: hidden;
-  font-family: 'Roboto', sans-serif;
-  transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
-}
-
-.container .product-list .product:hover {
-  box-shadow: 0 4px 8px 0 rgba(255, 181, 36, 0.5); /* Shadow with color #FFB524 appears on hover */
-}
-
-
-.container .product-list .product img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-bottom: 1px solid #FFB524; /* Partition between photo and details */
-}
-
-.container .product-list .product .product-details {
-    padding: 10px;
-    text-align: center;
-}
-
-.container .product-list .product .product-details h3 {
-    color: #333;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px; /* Adjusted for spacing */
-}
-
-.container .product-list .product .product-details p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 10px; /* Space for price and button */
-}
-
-.container .product-list .product .product-details .price {
-    color: #679d06; /* Green color for the price */
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.add-to-cart-btn {
-  background-color: transparent;
-  color: #679d06;
-  border: 1px solid #FFB524; /* Orange border */
-  border-radius: 20px; /* Rounded corners */
-  padding: 10px;
-  text-align: center;
-  display: block;
-  width: 100%;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.add-to-cart-btn:hover {
-  background-color: #FFB524;
-  color: white;
-}
-
-
-.cancel-btn {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    cursor: pointer;
-    font-size: 24px;
-    background: none;
-    border: none;
-    color: #000; /* Set the color of the 'X' symbol */
-}
-.search h1 {
-    color: #679d06; /* Sets the color of the 'Search ShopNest' text */
-    font-weight: bold; /* Makes the font bold */
-  
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your E-commerce Website</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!-- <button class="cancel-btn" onclick="window.location.href='index.html';">
-    X
-</button> -->
-<a href="{% url 'home' %}">
-    <button class="cancel-btn">
-      X
-    </button>
-  </a>
-<div class="container-fluid">
-<div class="container">
-<div class="search">
-<h1>Search Here</h1>
-<input type="text" name="" id="find" placeholder="Enter Keywords" onkeyup="search()">
-</div>
-<div class="product-list">
- 
-{% for product in products %}
-    <div class="product">
-<a href="{% url 'productdetails' product_id=product.product_id %}">
-          <img src="{{ product.image.url }}" alt="{{ product.name }}">  <div class="product-details">
+    <header>
+        <div class="logo">
+            <h1>Your Brand</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-</a>
+    <main>
+        <section class="products">
+            <div class="product">
+                <img src="product1.jpg" alt="Product 1">
+                <h2>Product 1 Name</h2>
+                <p>$XX.XX</p>
+                <button>Add to Cart</button>
+            </div>
+            <!-- More product listings -->
+        </section>
 
+        <aside class="cart">
+            <h2>Shopping Cart</h2>
+            <ul>
+                <!-- Cart items will be dynamically added here -->
+            </ul>
+            <div class="cart-total">
+                <h3>Total: $XX.XX</h3>
+                <button>Checkout</button>
+            </div>
+        </aside>
+    </main>
 
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <div class="price">$ {{ product.price }}</div>  <button class="add-to-cart-btn" value={{product.product_id}} value1={{product.seller.name}} onclick="addtocart(this)">Add to Cart</button>
-      </div>
-    </div>
-  {% endfor %}
- 
-
-</div></div></div>
-
-<!-- javascript -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/assets/lib/easing/easing.min.js"></script>
-    <script src="/static/assets/lib/waypoints/waypoints.min.js"></script>
-    <script src="/static/assets/lib/lightbox/js/lightbox.min.js"></script>
-    <script src="/static/assets/lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="/static/assets/js/main.js"></script>
-
-
-
-<script type="text/javascript">
-function search() {
-let filter = document.getElementById('find').value.toUpperCase();
-let item = document.querySelectorAll('.product');
-let l = document.getElementsByTagName('h3');
-for(var i = 0;i<=l.length;i++){
-let a=item[i].getElementsByTagName('h3')[0];
-let value=a.innerHTML || a.innerText || a.textContent;
-if(value.toUpperCase().indexOf(filter) > -1) {
-item[i].style.display="";
-}
-else
-{
-item[i].style.display="none";
-}
-}
-}
-
-
-function updateCartCount() {
-    $.ajax({
-        url: '{% url 'cart_count' %}',  // Update this URL based on your actual URL configuration
-        type: 'GET',
-        success: function(response) {
-            console.log('Cart count:', response.count);
-            $('#cartcoun').text(response.count); // Example: Update a span with id `cart-count`
-        },
-        error: function(error) {
-            console.log('Error fetching cart count:', error);
-        }
-    });
-}
-
-// Call updateCartCount on page load or after specific actions
-$(document).ready(function() {
-    updateCartCount();
-});
-
-function addtocart(element) {
-    // Extract product ID from the element's attributes
-    const productId = element.getAttribute('value');
-    const sellerName = element.getAttribute('value1');  // assuming these data attributes are correctly set
-debugger;
-    // AJAX request to the Django server
-    $.ajax({
-        url: '{% url 'add_to_cart' %}',  // URL to Django view (you will need to define this in urls.py)
-        type: 'POST',
-        data: {
-            'product_id': productId,
-            'quantity': 1,  // Example: add one item to cart, customize as needed
-            //'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()  // Handling CSRF token
-        },
-        success: function(response) {
-            debugger;
-    updateCartCount();
-
-            // Handle success
-            console.log('Item added to cart:', response);
-            //alert('Item added to cart!');
-        },
-        error: function(error) {
-            debugger;
-            // Handle errors
-            console.log('Error adding item to cart:', error);
-            alert('Failed to add item to cart.');
-        }
-    });
-}
-</script>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Your E-commerce Website</p>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
 </html>
